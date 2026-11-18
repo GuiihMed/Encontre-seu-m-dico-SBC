@@ -127,21 +127,24 @@
       align-items: center;
       justify-content: center;
       height: 40px;
-      padding: 0 20px;
+      padding: 0 22px;
       border: 1.5px solid #253575;
-      border-radius: 8px;
+      border-radius: 999px;
       font-size: 0.86rem;
       font-weight: 600;
       color: #253575;
       background-color: transparent;
       text-decoration: none;
-      transition: all 0.2s ease;
+      box-shadow: 0 2px 6px rgba(37, 53, 117, 0.08);
+      transition: all 0.25s ease;
       white-space: nowrap;
     }
 
     .sbc-btn-header-outline:hover {
-      background-color: rgba(37, 53, 117, 0.05);
+      background-color: rgba(37, 53, 117, 0.06);
       color: #102C6B;
+      box-shadow: 0 4px 10px rgba(37, 53, 117, 0.15);
+      transform: translateY(-1px);
     }
 
     .sbc-btn-header-solid {
@@ -152,19 +155,21 @@
       height: 40px;
       padding: 0 22px;
       border: none;
-      border-radius: 8px;
+      border-radius: 999px;
       font-size: 0.86rem;
       font-weight: 600;
       color: #FFFFFF;
       background-color: #253575;
       text-decoration: none;
-      transition: all 0.2s ease;
+      box-shadow: 0 3px 8px rgba(37, 53, 117, 0.22);
+      transition: all 0.25s ease;
       white-space: nowrap;
     }
 
     .sbc-btn-header-solid:hover {
       background-color: #1c2a61;
-      box-shadow: 0 4px 12px rgba(37, 53, 117, 0.25);
+      box-shadow: 0 5px 14px rgba(37, 53, 117, 0.32);
+      transform: translateY(-1px);
     }
 
     .sbc-btn-header-home {
@@ -172,21 +177,26 @@
       align-items: center;
       gap: 8px;
       height: 40px;
-      padding: 0 16px;
+      padding: 0 18px;
       margin-left: 10px;
       font-size: 0.86rem;
       font-weight: 600;
       color: #253575;
-      background: rgba(37, 53, 117, 0.06);
-      border-radius: 8px;
+      background: #FFFFFF;
+      border: 1px solid rgba(226, 232, 240, 0.95);
+      border-radius: 999px;
       text-decoration: none;
-      transition: all 0.2s ease;
+      box-shadow: 0 2px 8px rgba(16, 44, 107, 0.08);
+      transition: all 0.25s ease;
       white-space: nowrap;
     }
 
     .sbc-btn-header-home:hover {
-      background: rgba(37, 53, 117, 0.12);
+      background: #F8FAFD;
       color: #102C6B;
+      border-color: #CBD5E1;
+      box-shadow: 0 4px 12px rgba(16, 44, 107, 0.14);
+      transform: translateY(-1px);
     }
 
     /* ======================================================================
@@ -1176,22 +1186,22 @@
 
         <!-- Ações do Cabeçalho -->
         <nav class="sbc-header-actions" aria-label="Navegação institucional">
-          <a href="https://www.coluna.com.br/anuidade" target="_top" class="sbc-btn-header-outline">
+          <a href="https://login.sociedademedica.online/?idOrg=59&token=6435345777&urlRetorno=https://app.associatec.com.br/AreaAssociados/sbc?returnUrl=https://app.associatec.com.br/AreaAssociados/AssociadoCobrancas/HistoricoCobrancas" target="_blank" rel="noopener noreferrer" class="sbc-btn-header-outline">
             Anuidade 2026
           </a>
-          <a href="https://www.coluna.com.br/associado" target="_top" class="sbc-btn-header-solid">
+          <a href="https://login.sociedademedica.online/?idOrg=59&token=6435345777&urlRetorno=https://app.associatec.com.br/AreaAssociados/sbc?returnUrl=https://app.associatec.com.br/AreaAssociados/AssociadoCobrancas/HistoricoCobrancas" target="_blank" rel="noopener noreferrer" class="sbc-btn-header-solid">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
               <circle cx="12" cy="7" r="4"></circle>
             </svg>
             <span>Área do Associado</span>
           </a>
-          <a href="https://www.coluna.com.br" target="_top" class="sbc-btn-header-home">
+          <a href="https://www.coluna.com.br/" target="_top" class="sbc-btn-header-home">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
               <polyline points="9 22 9 12 15 12 15 22"></polyline>
             </svg>
-            <span>Volte ao Site</span>
+            <span>Voltar ao Site</span>
           </a>
         </nav>
       </div>
