@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Encontre um Médico Especialista — Sociedade Brasileira de Coluna (SBC)</title>
+  
+  <!-- Fontes Institucionais -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       1. VARIÁVEIS GLOBAIS & DESIGN TOKENS
+       ========================================================================== */
+    :root {
+      --sbc-navy-dark: #0D2040;
+      --sbc-navy-deep: #102C6B;
+      --sbc-navy-bar:  #253575;
+      --sbc-blue:      #184A90;
+      --sbc-cyan:      #2898C4;
+      --sbc-coral:     #D93B30;
+      --sbc-coral-hover: #BF3026;
+      --sbc-text-dark: #1E293B;
+      --sbc-text-muted:#5B6B82;
+      --sbc-border-light: rgba(213, 227, 240, 0.85);
+      --sbc-bg-light:  #F4F8FD;
+      --sbc-container-max: 1200px;
+      --sbc-radius-card: 24px;
+      --sbc-radius-input: 12px;
+      --sbc-shadow-card: 0 16px 40px rgba(13, 32, 64, 0.08);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      min-height: 100%;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: var(--sbc-text-dark);
+      background-color: #FFFFFF;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    img, video {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button, input, select {
+      font: inherit;
+    }
+
+    .sbc-container {
+      width: 100%;
+      max-width: var(--sbc-container-max);
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+    }
+
+    /* ==========================================================================
+       2. CABEÇALHO OFICIAL (HEADER INSTITUCIONAL)
+       ========================================================================== */
+    .sbc-top-bar {
+      width: 100%;
+      height: 38px;
+      background-color: var(--sbc-navy-bar);
+    }
+
+    .sbc-header {
+      width: 100%;
+      background-color: #FFFFFF;
+      border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+      position: relative;
+      z-index: 10;
+    }
+
+    .sbc-header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 86px;
+      gap: 20px;
+    }
+
+    .sbc-header-brand {
+      display: flex;
+      align-items: center;
+    }
+
+    .sbc-header-logo {
+      height: 52px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .sbc-header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .sbc-btn-header-outline {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 40px;
+      padding: 0 20px;
+      border: 1.5px solid var(--sbc-navy-bar);
+      border-radius: 8px;
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: var(--sbc-navy-bar);
+      background-color: transparent;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .sbc-btn-header-outline:hover {
+      background-color: rgba(37, 53, 117, 0.05);
+      color: var(--sbc-navy-dark);
+    }
+
+    .sbc-btn-header-solid {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      height: 40px;
+      padding: 0 22px;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: #FFFFFF;
+      background-color: var(--sbc-navy-bar);
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .sbc-btn-header-solid:hover {
+      background-color: var(--sbc-navy-deep);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(37, 53, 117, 0.25);
+    }
+
+    .sbc-btn-header-home {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      height: 40px;
+      padding: 0 18px;
+      border: 1px solid rgba(203, 213, 225, 0.8);
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--sbc-navy-dark);
+      background-color: #FAFCFE;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+      margin-left: 6px;
+    }
+
+    .sbc-btn-header-home:hover {
+      border-color: var(--sbc-navy-bar);
+      color: var(--sbc-navy-bar);
+      background-color: #FFFFFF;
+    }
+
+    /* ==========================================================================
+       3. SESSÃO HERO (INICIAL) & ÁREA PARA EMBED DE BUSCA
+       ========================================================================== */
+    .sbc-hero-section {
+      position: relative;
+      background: linear-gradient(180deg, #FFFFFF 0%, #F5F9FE 40%, #EBF3FA 100%);
+      padding: 44px 0 64px;
+      overflow: visible;
+    }
+
+    /* Ondas anatômicas de fundo (decorativas) */
+    .sbc-hero-waves-bg {
+      position: absolute;
+      top: 0;
+      left: -20px;
+      width: 440px;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.75;
+    }
+
+    .sbc-hero-waves-right-bg {
+      position: absolute;
+      top: -20px;
+      right: -30px;
+      width: 400px;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.6;
+    }
+
+    .sbc-hero-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      min-height: 380px;
+      padding-bottom: 28px;
+      z-index: 2;
+    }
+
+    .sbc-hero-intro {
+      max-width: 520px;
+      z-index: 3;
+    }
+
+    .sbc-hero-title {
+      font-size: clamp(2.1rem, 3.8vw, 3.1rem);
+      font-weight: 800;
+      line-height: 1.12;
+      color: var(--sbc-navy-dark);
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+
+    .sbc-hero-lead {
+      font-size: 1.02rem;
+      font-weight: 600;
+      line-height: 1.45;
+      color: var(--sbc-navy-deep);
+      margin-bottom: 8px;
+    }
+
+    .sbc-hero-sub {
+      font-size: 0.9rem;
+      line-height: 1.55;
+      color: var(--sbc-text-muted);
+    }
+
+    /* Mídia da foto com máscara de transição suave */
+    .sbc-hero-visual {
+      position: absolute;
+      top: -20px;
+      right: -10px;
+      width: 72%;
+      max-width: 890px;
+      height: 480px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .sbc-hero-photo-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 20px;
+      overflow: hidden;
+      -webkit-mask-image:
+        radial-gradient(ellipse 75% 70% at 58% 46%, rgba(0, 0, 0, 1) 35%, rgba(0, 0, 0, 0.85) 55%, rgba(0, 0, 0, 0.3) 78%, transparent 100%),
+        linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.45) 16%, rgba(0, 0, 0, 1) 32%, rgba(0, 0, 0, 1) 78%, rgba(0, 0, 0, 0.25) 94%, transparent 100%),
+        linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.85) 10%, rgba(0, 0, 0, 1) 22%, rgba(0, 0, 0, 1) 72%, rgba(0, 0, 0, 0.2) 92%, transparent 100%);
+      -webkit-mask-composite: source-in;
+      mask-image:
+        radial-gradient(ellipse 75% 70% at 58% 46%, rgba(0, 0, 0, 1) 35%, rgba(0, 0, 0, 0.85) 55%, rgba(0, 0, 0, 0.3) 78%, transparent 100%),
+        linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.45) 16%, rgba(0, 0, 0, 1) 32%, rgba(0, 0, 0, 1) 78%, rgba(0, 0, 0, 0.25) 94%, transparent 100%),
+        linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.85) 10%, rgba(0, 0, 0, 1) 22%, rgba(0, 0, 0, 1) 72%, rgba(0, 0, 0, 0.2) 92%, transparent 100%);
+      mask-composite: intersect;
+    }
+
+    .sbc-hero-photo-container video,
+    .sbc-hero-photo-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 25%;
+    }
+
+    /* Tagline flutuante à direita */
+    .sbc-hero-tagline-box {
+      position: relative;
+      z-index: 3;
+      padding: 16px 20px;
+      max-width: 220px;
+      align-self: flex-end;
+      margin-top: auto;
+      margin-bottom: 24px;
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.95);
+      box-shadow: 0 8px 24px rgba(13, 32, 64, 0.06);
+    }
+
+    .sbc-hero-tagline-box p {
+      font-size: 0.96rem;
+      font-weight: 600;
+      line-height: 1.38;
+      color: var(--sbc-navy-dark);
+    }
+
+    .sbc-hero-tagline-bar {
+      width: 34px;
+      height: 2.5px;
+      background: linear-gradient(90deg, var(--sbc-cyan) 0%, var(--sbc-blue) 100%);
+      margin-top: 10px;
+      border-radius: 2px;
+    }
+
+    /* ==========================================================================
+       4. CONTAINER DE BUSCA (ÁREA RESERVADA PARA A EMPRESA PARCEIRA)
+       ========================================================================== */
+    .sbc-search-wrapper {
+      position: relative;
+      z-index: 5;
+      margin-top: -36px;
+    }
+
+    .sbc-search-card-container {
+      background: #FFFFFF;
+      border-radius: var(--sbc-radius-card);
+      box-shadow: var(--sbc-shadow-card);
+      border: 1px solid var(--sbc-border-light);
+      padding: 24px 28px 18px;
+    }
+
+    .sbc-search-grid {
+      display: grid;
+      grid-template-columns: 1.35fr 1fr 1fr auto;
+      gap: 16px;
+      align-items: flex-end;
+    }
+
+    .sbc-form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .sbc-form-label {
+      font-size: 0.84rem;
+      font-weight: 600;
+      color: var(--sbc-navy-dark);
+      padding-left: 2px;
+    }
+
+    .sbc-input-field {
+      position: relative;
+      display: flex;
+      align-items: center;
+      height: 48px;
+      background: #FFFFFF;
+      border: 1px solid #D6E2EE;
+      border-radius: var(--sbc-radius-input);
+      transition: all 0.2s ease;
+    }
+
+    .sbc-input-field:focus-within {
+      border-color: var(--sbc-cyan);
+      box-shadow: 0 0 0 3px rgba(40, 152, 196, 0.15);
+    }
+
+    .sbc-input-icon {
+      position: absolute;
+      left: 14px;
+      color: var(--sbc-navy-dark);
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .sbc-input-control {
+      width: 100%;
+      height: 46px;
+      line-height: 46px;
+      border: none;
+      background: transparent;
+      padding: 0 14px 0 42px;
+      font-size: 0.95rem;
+      color: var(--sbc-navy-dark);
+      outline: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+    }
+
+    select.sbc-input-control {
+      -webkit-appearance: none !important;
+      -moz-appearance: none !important;
+      appearance: none !important;
+      background-color: transparent !important;
+      background-image: none !important;
+      height: 46px;
+      line-height: 46px;
+      padding-top: 0;
+      padding-bottom: 0;
+      padding-right: 38px;
+      cursor: pointer;
+    }
+
+    select.sbc-input-control::-ms-expand {
+      display: none;
+    }
+
+    .sbc-select-arrow {
+      position: absolute;
+      right: 14px;
+      color: var(--sbc-navy-dark);
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .sbc-btn-search {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      height: 48px;
+      padding: 0 34px;
+      border: none;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #E04338 0%, var(--sbc-coral) 60%, var(--sbc-coral-hover) 100%);
+      color: #FFFFFF;
+      font-size: 0.94rem;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.25s ease;
+      box-shadow: 0 6px 18px rgba(217, 59, 48, 0.28);
+    }
+
+    .sbc-btn-search:hover {
+      background: linear-gradient(135deg, #E84C41 0%, #E04338 60%, #C93328 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(217, 59, 48, 0.38);
+    }
+
+    .sbc-search-footer {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .sbc-btn-geo {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: none;
+      border: none;
+      font-size: 0.84rem;
+      font-weight: 600;
+      color: var(--sbc-blue);
+      cursor: pointer;
+      padding: 4px 2px;
+      transition: color 0.2s ease;
+    }
+
+    .sbc-btn-geo:hover {
+      color: var(--sbc-navy-dark);
+    }
+
+    /* ==========================================================================
+       5. RODAPÉ OFICIAL (FOOTER INSTITUCIONAL)
+       ========================================================================== */
+    .sbc-footer {
+      background-color: var(--sbc-navy-deep);
+      color: #FFFFFF;
+      padding: 48px 0 40px;
+      position: relative;
+    }
+
+    .sbc-footer-inner {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1.3fr 0.5fr;
+      gap: 36px;
+      align-items: center;
+    }
+
+    .sbc-footer-logo-wrap {
+      display: flex;
+      align-items: center;
+    }
+
+    .sbc-footer-logo {
+      height: 58px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .sbc-footer-contacts {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .sbc-footer-contact-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.86rem;
+      color: #FFFFFF;
+      text-decoration: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .sbc-footer-contact-item:hover {
+      opacity: 0.85;
+    }
+
+    .sbc-footer-contact-item svg {
+      flex-shrink: 0;
+      color: #FFFFFF;
+    }
+
+    .sbc-footer-address {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 0.86rem;
+      line-height: 1.5;
+      color: #FFFFFF;
+    }
+
+    .sbc-footer-address svg {
+      flex-shrink: 0;
+      margin-top: 3px;
+      color: #FFFFFF;
+    }
+
+    .sbc-footer-socials {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 12px;
+    }
+
+    .sbc-footer-social-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      color: #FFFFFF;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .sbc-footer-social-link:hover {
+      transform: scale(1.15);
+      opacity: 0.9;
+    }
+
+    .sbc-footer-bottom-bar {
+      width: 100%;
+      height: 28px;
+      background-color: var(--sbc-navy-dark);
+    }
+
+    /* ==========================================================================
+       6. RESPONSIVIDADE (TABLET & MOBILE)
+       ========================================================================== */
+    @media (max-width: 1024px) {
+      .sbc-footer-inner {
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+      }
+
+      .sbc-footer-socials {
+        align-items: flex-start;
+        flex-direction: row;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .sbc-header-inner {
+        height: auto;
+        padding: 14px 0;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+      }
+
+      .sbc-header-actions {
+        width: 100%;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .sbc-btn-header-outline,
+      .sbc-btn-header-solid,
+      .sbc-btn-header-home {
+        height: 36px;
+        padding: 0 14px;
+        font-size: 0.8rem;
+      }
+
+      .sbc-btn-header-home {
+        margin-left: 0;
+      }
+
+      .sbc-hero-top {
+        flex-direction: column;
+        align-items: flex-start;
+        min-height: auto;
+        padding-bottom: 16px;
+      }
+
+      .sbc-hero-visual {
+        position: relative;
+        right: auto;
+        top: auto;
+        width: 100%;
+        max-width: 100%;
+        height: 240px;
+        margin: 16px 0;
+      }
+
+      .sbc-hero-tagline-box {
+        align-self: flex-start;
+        max-width: 100%;
+        margin-bottom: 16px;
+      }
+
+      .sbc-search-wrapper {
+        margin-top: 0;
+      }
+
+      .sbc-search-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .sbc-btn-search {
+        width: 100%;
+      }
+
+      .sbc-footer-inner {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========================================================================
+       CABEÇALHO INSTITUCIONAL DA SBC
+       ======================================================================== -->
+  <div class="sbc-top-bar" aria-hidden="true"></div>
+  <header class="sbc-header" role="banner">
+    <div class="sbc-container">
+      <div class="sbc-header-inner">
+        <!-- Logotipo Oficial da SBC -->
+        <a href="https://www.coluna.com.br" class="sbc-header-brand" title="Sociedade Brasileira de Coluna">
+          <img src="img/logo-sbc-header.png" alt="SBC - Sociedade Brasileira de Coluna" class="sbc-header-logo">
+        </a>
+
+        <!-- Ações do Cabeçalho -->
+        <nav class="sbc-header-actions" aria-label="Navegação do topo">
+          <a href="https://www.coluna.com.br/anuidade" target="_top" class="sbc-btn-header-outline">
+            Anuidade 2026
+          </a>
+          <a href="https://www.coluna.com.br/associado" target="_top" class="sbc-btn-header-solid">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span>Área do Associado</span>
+          </a>
+          <a href="https://www.coluna.com.br" target="_top" class="sbc-btn-header-home">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+              <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            </svg>
+            <span>Volte ao Site</span>
+          </a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ======================================================================
+         SESSÃO INICIAL (HERO): APRESENTAÇÃO + ÁREA DO MECANISMO DE BUSCA
+         ====================================================================== -->
+    <section class="sbc-hero-section" aria-labelledby="sbc-hero-title">
+      <!-- Ondas Decorativas de Fundo (Esquerda) -->
+      <svg class="sbc-hero-waves-bg" viewBox="0 0 520 960" fill="none" aria-hidden="true">
+        <path d="M -50 20 C 130 70, 230 200, 140 400 C 60 550, 80 660, 200 770" stroke="#2898C4" stroke-opacity="0.35" stroke-width="2" />
+        <path d="M -75 75 C 100 120, 190 240, 105 420 C 30 560, 50 670, 160 780" stroke="#15578E" stroke-opacity="0.25" stroke-width="1.8" />
+        <path d="M -25 -25 C 160 30, 270 170, 175 375 C 95 515, 115 630, 245 745" stroke="#94BFE3" stroke-opacity="0.4" stroke-width="2.2" />
+      </svg>
+
+      <!-- Ondas Decorativas de Fundo (Direita) -->
+      <svg class="sbc-hero-waves-right-bg" viewBox="0 0 520 960" fill="none" aria-hidden="true">
+        <path d="M 570 10 C 390 60, 290 190, 380 390 C 460 540, 440 650, 320 760" stroke="#2898C4" stroke-opacity="0.3" stroke-width="2" />
+        <path d="M 595 65 C 420 110, 330 230, 415 410 C 490 550, 470 660, 360 770" stroke="#15578E" stroke-opacity="0.2" stroke-width="1.8" />
+      </svg>
+
+      <div class="sbc-container">
+        <!-- Topo da Sessão Inicial -->
+        <div class="sbc-hero-top">
+          <!-- Textos Editoriais -->
+          <div class="sbc-hero-intro">
+            <h1 class="sbc-hero-title" id="sbc-hero-title">Encontre um<br>médico da SBC</h1>
+            <p class="sbc-hero-lead">Busque médicos que fazem parte da Sociedade Brasileira de Coluna.</p>
+            <p class="sbc-hero-sub">Formação, ciência e atualização profissional em uma comunidade médica nacional.</p>
+          </div>
+
+          <!-- Mídia Clínica com Transição Suave (Vídeo de Apoio) -->
+          <div class="sbc-hero-visual" aria-hidden="true">
+            <div class="sbc-hero-photo-container">
+              <video
+                autoplay
+                muted
+                loop
+                playsinline
+                preload="auto"
+                disablepictureinpicture
+              >
+                <source src="https://video.wixstatic.com/video/963fe2_b125bd7968e2427c813a0a2c7c8afacc/1080p/mp4/file.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+
+          <!-- Destaque Lateral (Tagline) -->
+          <aside class="sbc-hero-tagline-box" aria-label="Compromisso SBC">
+            <p>Cuidado qualificado para uma vida com mais movimento.</p>
+            <div class="sbc-hero-tagline-bar" aria-hidden="true"></div>
+          </aside>
+        </div>
+
+        <!-- ==================================================================
+             CONTAINER DE BUSCA OFICIAL
+             OBSERVAÇÃO PARA DESENVOLVEDORES DA EMPRESA PARCEIRA:
+             Insira ou acople seu widget/script de busca diretamente dentro de:
+             #sbc-partner-search-widget
+             ================================================================== -->
+        <div class="sbc-search-wrapper" id="sbc-partner-search-widget">
+          <div class="sbc-search-card-container">
+            <form class="sbc-search-form" action="https://encontre-especialista-sbc.pages.dev/" method="GET" target="_top">
+              <div class="sbc-search-grid">
+                
+                <!-- Campo: Nome do Médico -->
+                <div class="sbc-form-group">
+                  <label class="sbc-form-label" for="busca-nome">Nome do médico</label>
+                  <div class="sbc-input-field">
+                    <span class="sbc-input-icon" aria-hidden="true">
+                      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                      </svg>
+                    </span>
+                    <input
+                      type="search"
+                      id="busca-nome"
+                      name="nome"
+                      class="sbc-input-control"
+                      placeholder="Digite o nome"
+                      autocomplete="off"
+                    >
+                  </div>
+                </div>
+
+                <!-- Campo: Estado (UF) -->
+                <div class="sbc-form-group">
+                  <label class="sbc-form-label" for="busca-estado">Estado</label>
+                  <div class="sbc-input-field">
+                    <span class="sbc-input-icon" aria-hidden="true">
+                      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                        <circle cx="12" cy="10" r="3"></circle>
+                      </svg>
+                    </span>
+                    <select id="busca-estado" name="estado" class="sbc-input-control">
+                      <option value="">Selecione</option>
+                      <option value="AC">Acre</option>
+                      <option value="AL">Alagoas</option>
+                      <option value="AP">Amapá</option>
+                      <option value="AM">Amazonas</option>
+                      <option value="BA">Bahia</option>
+                      <option value="CE">Ceará</option>
+                      <option value="DF">Distrito Federal</option>
+                      <option value="ES">Espírito Santo</option>
+                      <option value="GO">Goiás</option>
+                      <option value="MA">Maranhão</option>
+                      <option value="MT">Mato Grosso</option>
+                      <option value="MS">Mato Grosso do Sul</option>
+                      <option value="MG">Minas Gerais</option>
+                      <option value="PA">Pará</option>
+                      <option value="PB">Paraíba</option>
+                      <option value="PR">Paraná</option>
+                      <option value="PE">Pernambuco</option>
+                      <option value="PI">Piauí</option>
+                      <option value="RJ">Rio de Janeiro</option>
+                      <option value="RN">Rio Grande do Norte</option>
+                      <option value="RS">Rio Grande do Sul</option>
+                      <option value="RO">Rondônia</option>
+                      <option value="RR">Roraima</option>
+                      <option value="SC">Santa Catarina</option>
+                      <option value="SP">São Paulo</option>
+                      <option value="SE">Sergipe</option>
+                      <option value="TO">Tocantins</option>
+                    </select>
+                    <span class="sbc-select-arrow" aria-hidden="true">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                      </svg>
+                    </span>
+                  </div>
+                </div>
+
+                <!-- Campo: Cidade -->
+                <div class="sbc-form-group">
+                  <label class="sbc-form-label" for="busca-cidade">Cidade</label>
+                  <div class="sbc-input-field">
+                    <span class="sbc-input-icon" aria-hidden="true">
+                      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 21h18"></path>
+                        <path d="M9 8h1"></path>
+                        <path d="M9 12h1"></path>
+                        <path d="M9 16h1"></path>
+                        <path d="M14 8h1"></path>
+                        <path d="M14 12h1"></path>
+                        <path d="M14 16h1"></path>
+                        <path d="M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16"></path>
+                      </svg>
+                    </span>
+                    <select id="busca-cidade" name="cidade" class="sbc-input-control">
+                      <option value="">Selecione</option>
+                    </select>
+                    <span class="sbc-select-arrow" aria-hidden="true">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                      </svg>
+                    </span>
+                  </div>
+                </div>
+
+                <!-- Botão de Ação Primária -->
+                <button type="submit" class="sbc-btn-search">
+                  <span>Buscar</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                </button>
+              </div>
+
+              <!-- Rodapé da Busca: Geolocalização -->
+              <div class="sbc-search-footer">
+                <button type="button" class="sbc-btn-geo" id="btn-user-geo">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <circle cx="12" cy="12" r="3"></circle>
+                    <line x1="12" y1="2" x2="12" y2="5"></line>
+                    <line x1="12" y1="19" x2="12" y2="22"></line>
+                    <line x1="2" y1="12" x2="5" y2="12"></line>
+                    <line x1="19" y1="12" x2="22" y2="12"></line>
+                  </svg>
+                  <span>Usar minha localização</span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <!-- / Fim do container de busca -->
+
+      </div>
+    </section>
+  </main>
+
+  <!-- ========================================================================
+       RODAPÉ INSTITUCIONAL DA SBC
+       ======================================================================== -->
+  <footer class="sbc-footer" role="contentinfo">
+    <div class="sbc-container">
+      <div class="sbc-footer-inner">
+        
+        <!-- Coluna 1: Logotipo Negativo SBC -->
+        <div class="sbc-footer-logo-wrap">
+          <a href="https://www.coluna.com.br" title="Sociedade Brasileira de Coluna">
+            <img src="img/logo-sbc-footer.png" alt="SBC - Sociedade Brasileira de Coluna" class="sbc-footer-logo">
+          </a>
+        </div>
+
+        <!-- Coluna 2: Canais de Contato Direto -->
+        <div class="sbc-footer-contacts">
+          <a href="tel:+5511974912087" class="sbc-footer-contact-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+            </svg>
+            <span>(11) 97491-2087</span>
+          </a>
+          <a href="mailto:coluna@coluna.com.br" class="sbc-footer-contact-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+            <span>coluna@coluna.com.br</span>
+          </a>
+        </div>
+
+        <!-- Coluna 3: Endereço da Sede -->
+        <address class="sbc-footer-address">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+            <circle cx="12" cy="10" r="3"></circle>
+          </svg>
+          <div>
+            Alameda Lorena, 1304, Conjuntos<br>
+            1406/1407 - Jardim Paulista – São<br>
+            Paulo, SP - CEP 01424-906
+          </div>
+        </address>
+
+        <!-- Coluna 4: Redes Sociais Oficiais -->
+        <div class="sbc-footer-socials">
+          <!-- Instagram -->
+          <a href="https://www.instagram.com/sbc_coluna/" target="_blank" rel="noopener noreferrer" class="sbc-footer-social-link" aria-label="Instagram da SBC">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+          </a>
+          <!-- Facebook -->
+          <a href="https://www.facebook.com/sbcoluna" target="_blank" rel="noopener noreferrer" class="sbc-footer-social-link" aria-label="Facebook da SBC">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+            </svg>
+          </a>
+          <!-- YouTube -->
+          <a href="https://www.youtube.com/@sociedadebrasileiradecoluna" target="_blank" rel="noopener noreferrer" class="sbc-footer-social-link" aria-label="YouTube da SBC">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path>
+              <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="#102C6B"></polygon>
+            </svg>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </footer>
+  <div class="sbc-footer-bottom-bar" aria-hidden="true"></div>
+
+</body>
+</html>
