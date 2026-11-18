@@ -96,7 +96,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: 86px;
+      height: 94px;
       gap: 20px;
     }
 
@@ -106,9 +106,14 @@
     }
 
     .sbc-header-logo {
-      height: 52px;
+      height: 64px;
       width: auto;
       object-fit: contain;
+      transition: transform 0.2s ease;
+    }
+
+    .sbc-header-logo:hover {
+      transform: scale(1.02);
     }
 
     .sbc-header-actions {
@@ -191,7 +196,7 @@
       position: relative;
       background: linear-gradient(180deg, #FFFFFF 0%, #F4F8FD 42%, #EAF2FA 100%);
       padding: 34px 0 52px;
-      overflow: visible;
+      overflow: hidden;
     }
 
     .sbc-hero-waves {
@@ -199,11 +204,11 @@
       top: 0;
       left: -30px;
       width: 480px;
-      height: calc(100% + 240px);
+      height: 100%;
       pointer-events: none;
       z-index: 2;
       opacity: 0.85;
-      overflow: visible;
+      overflow: hidden;
       animation: sbcWaveBreathe 18s ease-in-out infinite alternate;
       transform-origin: 20% 40%;
     }
@@ -213,11 +218,11 @@
       top: -40px;
       right: -60px;
       width: 420px;
-      height: calc(100% + 180px);
+      height: 100%;
       pointer-events: none;
       z-index: 2;
       opacity: 0.65;
-      overflow: visible;
+      overflow: hidden;
       animation: sbcWaveBreatheRight 22s ease-in-out infinite alternate;
       transform-origin: 80% 30%;
     }
@@ -806,13 +811,14 @@
     .sbc-footer {
       background-color: #102C6B;
       color: #FFFFFF;
-      padding: 48px 0 40px;
+      padding: 46px 0 40px;
       position: relative;
+      z-index: 5;
     }
 
     .sbc-footer-inner {
       display: grid;
-      grid-template-columns: 1.2fr 1fr 1.3fr 0.5fr;
+      grid-template-columns: 1.3fr 1fr 1.3fr 0.5fr;
       gap: 36px;
       align-items: center;
     }
@@ -823,9 +829,14 @@
     }
 
     .sbc-footer-logo {
-      height: 58px;
+      height: 80px;
       width: auto;
       object-fit: contain;
+      transition: transform 0.2s ease;
+    }
+
+    .sbc-footer-logo:hover {
+      transform: scale(1.02);
     }
 
     .sbc-footer-contacts {
@@ -1123,6 +1134,14 @@
         font-size: 0.82rem;
       }
 
+      .sbc-header-logo {
+        height: 52px;
+      }
+
+      .sbc-footer-logo {
+        height: 68px;
+      }
+
       .sbc-footer-inner {
         grid-template-columns: 1fr;
         gap: 26px;
@@ -1150,9 +1169,9 @@
   <header class="sbc-header" role="banner">
     <div class="sbc-container">
       <div class="sbc-header-inner">
-        <!-- Logotipo Oficial da SBC -->
-        <a href="https://www.coluna.com.br" class="sbc-header-brand" title="Sociedade Brasileira de Coluna">
-          <img src="img/logo-sbc-header.png" alt="SBC - Sociedade Brasileira de Coluna" class="sbc-header-logo">
+        <!-- Logotipo Oficial da SBC (Logo Azul) -->
+        <a href="https://www.coluna.com.br/" class="sbc-header-brand" title="Sociedade Brasileira de Coluna">
+          <img src="img/logo-azul.png" alt="SBC - Sociedade Brasileira de Coluna" class="sbc-header-logo">
         </a>
 
         <!-- Ações do Cabeçalho -->
@@ -1388,10 +1407,10 @@
   <footer class="sbc-footer" role="contentinfo">
     <div class="sbc-container">
       <div class="sbc-footer-inner">
-        <!-- Coluna 1: Logotipo Negativo SBC -->
+        <!-- Coluna 1: Logotipo Negativo SBC (Logo Branca) -->
         <div class="sbc-footer-logo-wrap">
-          <a href="https://www.coluna.com.br" title="Sociedade Brasileira de Coluna">
-            <img src="img/logo-sbc-footer.png" alt="SBC - Sociedade Brasileira de Coluna" class="sbc-footer-logo">
+          <a href="https://www.coluna.com.br/" title="Sociedade Brasileira de Coluna">
+            <img src="img/logo-branca.png" alt="SBC - Sociedade Brasileira de Coluna" class="sbc-footer-logo">
           </a>
         </div>
 
