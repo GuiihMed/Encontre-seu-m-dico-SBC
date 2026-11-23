@@ -1829,6 +1829,9 @@
         selectEl.classList.toggle('is-placeholder', !selectEl.value);
       }
 
+      // Flag para impedir que o Enter nos filtros dos dropdowns submeta o formulário
+      let isDropdownSelecting = false;
+
       // ======================================================================
       // DROPDOWNS CUSTOMIZADOS E FLUIDOS (ESTADO E CIDADE)
       // ======================================================================
@@ -2069,6 +2072,9 @@
             } else if (e.key === 'Enter') {
               e.preventDefault();
               e.stopPropagation();
+              isDropdownSelecting = true;
+              setTimeout(() => { isDropdownSelecting = false; }, 400);
+
               if (highlightedIndex >= 0 && visibleItems[highlightedIndex]) {
                 const item = visibleItems[highlightedIndex];
                 const val = item.getAttribute('data-value');
@@ -2297,13 +2303,14 @@
       // SUBMISSÃO DO FORMULÁRIO DE BUSCA (REDIRECIONA PARA O PORTAL OFICIAL)
       // ======================================================================
       form.addEventListener('submit', (event) => {
-        if (document.activeElement && document.activeElement.classList.contains('sbc-dropdown-search-input')) {
-          event.preventDefault();
+        event.preventDefault();
+
+        // Se o evento foi disparado pelo Enter no filtro do dropdown, cancela submissão
+        if (isDropdownSelecting) {
           event.stopPropagation();
           return;
         }
 
-        event.preventDefault();
         const uf = selectEstado.value;
         const cidade = selectCidade.value;
         const nome = (inputNome.value || '').trim();
