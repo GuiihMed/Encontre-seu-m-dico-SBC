@@ -2761,56 +2761,100 @@
       });
 
       // ======================================================================
-      // GEOLOCALIZAÇÃO: USAR MINHA LOCALIZAÇÃO
+      // GEOLOCALIZAÇÃO: USAR MINHA LOCALIZAÇÃO (GPS COM FALLBACK POR IP)
       // ======================================================================
+      const btnLocationLabel = btnLocation ? btnLocation.querySelector('span') : null;
+      const defaultLocationLabel = btnLocationLabel ? btnLocationLabel.textContent : 'Usar minha localização';
+
       btnLocation.addEventListener('click', () => {
         if (btnLocation.disabled) return;
         const currentGeoRequest = ++geoRequestId;
+        let settled = false;
 
-        const applyLocation = (uf, cidade, statusMsg) => {
+        const resetButton = () => {
           btnLocation.disabled = false;
           btnLocation.removeAttribute('aria-busy');
-          if (currentGeoRequest !== geoRequestId) return;
+          if (btnLocationLabel) btnLocationLabel.textContent = defaultLocationLabel;
+        };
 
-          // Selecionar estado no dropdown customizado e no select nativo
+        const applyLocation = (uf, cidade, statusMsg) => {
+          if (settled || currentGeoRequest !== geoRequestId) return;
+          settled = true;
+          resetButton();
+
           if (estadoDropdown) {
             estadoDropdown.selectValue(uf, null, false);
           } else {
             selectEstado.value = uf;
           }
 
-          // Carregar cidades correspondentes e selecionar cidade detectada
           carregarCidades(uf, cidade);
-
           locationStatus.textContent = statusMsg;
         };
 
-        if (!navigator.geolocation) {
-          applyLocation('SP', 'São Paulo', 'Localização aproximada aplicada: São Paulo, SP');
-          return;
-        }
+        const failLocation = () => {
+          if (settled || currentGeoRequest !== geoRequestId) return;
+          settled = true;
+          resetButton();
+          locationStatus.textContent = 'Não foi possível detectar sua localização. Selecione manualmente.';
+        };
+
+        const findUfByRegionName = (regionName) => {
+          const norm = normalizeText(regionName);
+          if (!norm) return '';
+          const found = ESTADOS_BRASIL.find(
+            (e) => normalizeText(e.nome) === norm || normalizeText(e.uf) === norm
+          );
+          return found ? found.uf : '';
+        };
+
+        const fallbackByIp = () => {
+          if (settled || currentGeoRequest !== geoRequestId) return;
+          fetch('https://get.geojs.io/v1/ip/geo.json')
+            .then((res) => res.json())
+            .then((ipInfo) => {
+              const uf = findUfByRegionName(ipInfo.region);
+              if (!uf) {
+                failLocation();
+                return;
+              }
+              const cidade = ipInfo.city || '';
+              applyLocation(
+                uf,
+                cidade,
+                `Localização aproximada: ${cidade ? cidade + ', ' : ''}${uf}`
+              );
+            })
+            .catch(failLocation);
+        };
 
         btnLocation.disabled = true;
         btnLocation.setAttribute('aria-busy', 'true');
+        if (btnLocationLabel) btnLocationLabel.textContent = 'Detectando...';
         locationStatus.textContent = 'Detectando localização...';
 
-        const geoTimeout = setTimeout(() => {
-          applyLocation('SP', 'São Paulo', 'Localização aproximada aplicada: São Paulo, SP');
-        }, 3800);
+        if (!navigator.geolocation) {
+          fallbackByIp();
+          return;
+        }
 
         navigator.geolocation.getCurrentPosition(
           (pos) => {
-            clearTimeout(geoTimeout);
             const lat = pos.coords.latitude;
             const lon = pos.coords.longitude;
 
-            // Tentativa rápida de reverse geocoding para estados e cidades do Brasil
-            fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${encodeURIComponent(lat)}&longitude=${encodeURIComponent(lon)}&localityLanguage=pt`)
+            fetch(`https://api-bdc.io/data/reverse-geocode-client?latitude=${encodeURIComponent(lat)}&longitude=${encodeURIComponent(lon)}&localityLanguage=pt`)
               .then((res) => res.json())
               .then((info) => {
                 const rawUf = (info.principalSubdivisionCode || '').replace(/^BR-/, '').toUpperCase();
-                const ufValida = ESTADOS_BRASIL.some((e) => e.uf === rawUf) ? rawUf : 'SP';
-                const cidadeDetectada = info.city || info.locality || (ufValida === 'SP' ? 'São Paulo' : '');
+                const ufValida = ESTADOS_BRASIL.some((e) => e.uf === rawUf)
+                  ? rawUf
+                  : findUfByRegionName(info.principalSubdivision);
+                if (!ufValida) {
+                  fallbackByIp();
+                  return;
+                }
+                const cidadeDetectada = info.city || info.locality || '';
 
                 applyLocation(
                   ufValida,
@@ -2818,15 +2862,12 @@
                   `Localização detectada: ${cidadeDetectada ? cidadeDetectada + ', ' : ''}${ufValida}`
                 );
               })
-              .catch(() => {
-                applyLocation('SP', 'São Paulo', 'Localização aproximada aplicada: São Paulo, SP');
-              });
+              .catch(fallbackByIp);
           },
           () => {
-            clearTimeout(geoTimeout);
-            applyLocation('SP', 'São Paulo', 'Localização aproximada aplicada: São Paulo, SP');
+            fallbackByIp();
           },
-          { timeout: 3500, enableHighAccuracy: false }
+          { timeout: 8000, maximumAge: 300000, enableHighAccuracy: false }
         );
       });
 
