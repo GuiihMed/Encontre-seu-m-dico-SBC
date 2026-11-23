@@ -1589,7 +1589,6 @@
                       placeholder="Filtrar estado..."
                       autocomplete="off"
                       aria-label="Filtrar estado"
-                      onkeydown="if(event.key==='Enter'){event.preventDefault();}"
                     />
                   </div>
                   <div class="sbc-dropdown-list" id="sbc-list-estado" tabindex="-1"></div>
@@ -1643,7 +1642,6 @@
                       placeholder="Filtrar cidade..."
                       autocomplete="off"
                       aria-label="Filtrar cidade"
-                      onkeydown="if(event.key==='Enter'){event.preventDefault();}"
                     />
                   </div>
                   <div class="sbc-dropdown-list" id="sbc-list-cidade" tabindex="-1"></div>
@@ -2290,9 +2288,8 @@
       form.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' && e.target && (e.target.classList.contains('sbc-dropdown-search-input') || e.target.classList.contains('sbc-dropdown-trigger'))) {
           e.preventDefault();
-          e.stopPropagation();
         }
-      }, true);
+      });
 
       // ======================================================================
       // SUBMISSÃO DO FORMULÁRIO DE BUSCA (REDIRECIONA PARA O PORTAL OFICIAL)
