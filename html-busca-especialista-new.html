@@ -2654,7 +2654,7 @@
       function carregarEstados() {
         const estadosItems = ESTADOS_BRASIL.map((item) => ({
           value: item.uf,
-          label: `${item.nome} (${item.uf})`
+          label: `${item.nome} | ${item.uf}`
         }));
         if (estadoDropdown) {
           estadoDropdown.setOptions(estadosItems, 'Selecione');
