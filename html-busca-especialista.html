@@ -1565,6 +1565,7 @@
                   id="sbc-trigger-estado"
                   aria-haspopup="listbox"
                   aria-expanded="false"
+                  aria-controls="sbc-panel-estado"
                   aria-labelledby="sbc-label-estado sbc-trigger-estado-text"
                 >
                   <span class="sbc-dropdown-trigger-text is-placeholder" id="sbc-trigger-estado-text">Selecione</span>
@@ -1618,6 +1619,7 @@
                   id="sbc-trigger-cidade"
                   aria-haspopup="listbox"
                   aria-expanded="false"
+                  aria-controls="sbc-panel-cidade"
                   aria-labelledby="sbc-label-cidade sbc-trigger-cidade-text"
                 >
                   <span class="sbc-dropdown-trigger-text is-placeholder" id="sbc-trigger-cidade-text">Selecione</span>
@@ -1978,7 +1980,7 @@
           });
 
           if (triggerEvent) {
-            closePanel(true);
+            closePanel(false);
             hiddenSelect.dispatchEvent(new Event('change', { bubbles: true }));
           }
         }
