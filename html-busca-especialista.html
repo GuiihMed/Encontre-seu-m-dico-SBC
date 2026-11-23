@@ -48,6 +48,11 @@
       -moz-osx-font-smoothing: grayscale;
     }
 
+    main {
+      position: relative;
+      z-index: 20;
+    }
+
     img,
     video {
       max-width: 100%;
@@ -205,8 +210,10 @@
     .sbc-hero {
       position: relative;
       background: linear-gradient(180deg, #FFFFFF 0%, #F4F8FD 42%, #EAF2FA 100%);
-      padding: 34px 0 52px;
-      overflow: hidden;
+      padding: 34px 0 90px;
+      overflow-x: clip;
+      overflow-y: visible;
+      z-index: 20;
     }
 
     .sbc-hero-waves {
@@ -548,24 +555,232 @@
       cursor: text;
     }
 
-    select.sbc-control {
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      appearance: none;
-      background-color: transparent;
-      background-image: none;
-      height: 44px;
-      line-height: 44px;
-      padding: 0 36px 0 40px;
+    .sbc-control::placeholder {
+      color: var(--sbc-muted);
+    }
+
+    /* ==========================================================================
+       DROPDOWNS CUSTOMIZADOS E FLUIDOS (ESTADO E CIDADE)
+       ========================================================================== */
+    .sbc-dropdown-wrap {
+      position: relative;
+      overflow: visible !important; /* Essencial para o painel flutuante não ser recortado */
       cursor: pointer;
     }
 
-    select.sbc-control.is-placeholder {
-      color: var(--sbc-muted);
+    .sbc-field-group {
+      position: relative;
     }
 
-    .sbc-control::placeholder {
+    .sbc-field-group:has(.sbc-dropdown-wrap.is-open) {
+      z-index: 120;
+    }
+
+    .sbc-hidden-select {
+      position: absolute !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+      width: 1px !important;
+      height: 1px !important;
+      margin: -1px !important;
+      clip: rect(0, 0, 0, 0) !important;
+    }
+
+    .sbc-dropdown-trigger {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      height: 44px;
+      padding: 0 36px 0 40px;
+      background: transparent;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      text-align: left;
+      font-size: max(1rem, 0.94rem);
+      color: var(--sbc-navy);
+      font-family: inherit;
+      user-select: none;
+      transition: color 0.18s ease;
+    }
+
+    .sbc-dropdown-trigger:focus-visible {
+      outline: 2px solid var(--sbc-blue);
+      outline-offset: -2px;
+      border-radius: var(--sbc-radius-sm);
+    }
+
+    .sbc-dropdown-trigger-text {
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-weight: 500;
+    }
+
+    .sbc-dropdown-trigger-text.is-placeholder {
       color: var(--sbc-muted);
+      font-weight: 400;
+    }
+
+    .sbc-dropdown-wrap .sbc-select-chevron {
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s ease;
+    }
+
+    .sbc-dropdown-wrap.is-open .sbc-select-chevron {
+      transform: rotate(180deg);
+      color: var(--sbc-blue);
+    }
+
+    .sbc-dropdown-wrap.is-open {
+      border-color: var(--sbc-cyan);
+      box-shadow: 0 0 0 3px rgba(40, 152, 196, 0.18);
+    }
+
+    /* Painel Flutuante do Dropdown */
+    .sbc-dropdown-panel {
+      position: absolute;
+      top: calc(100% + 6px);
+      left: 0;
+      width: 100%;
+      min-width: 250px;
+      background: #FFFFFF;
+      border: 1.5px solid #D5E3F0;
+      border-radius: 14px;
+      box-shadow: 0 16px 36px rgba(10, 50, 84, 0.14), 0 4px 12px rgba(10, 50, 84, 0.06);
+      z-index: 150;
+      padding: 8px;
+      display: flex;
+      flex-direction: column;
+      animation: sbcDropdownDrop 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .sbc-dropdown-panel[hidden] {
+      display: none !important;
+    }
+
+    @keyframes sbcDropdownDrop {
+      from {
+        opacity: 0;
+        transform: translateY(-6px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .sbc-dropdown-search-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+      padding: 0 10px;
+      margin-bottom: 6px;
+      background: #F4F8FC;
+      border: 1px solid #D9E5F2;
+      border-radius: 9px;
+      height: 38px;
+      flex-shrink: 0;
+    }
+
+    .sbc-dropdown-search-wrap svg {
+      color: var(--sbc-muted);
+      margin-right: 8px;
+      flex-shrink: 0;
+    }
+
+    .sbc-dropdown-search-input {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: transparent;
+      font-size: 0.88rem;
+      font-family: inherit;
+      color: var(--sbc-navy);
+      outline: none;
+    }
+
+    .sbc-dropdown-search-input::placeholder {
+      color: #7B8F9E;
+    }
+
+    .sbc-dropdown-list {
+      max-height: 220px;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      outline: none;
+      padding-right: 2px;
+    }
+
+    .sbc-dropdown-list::-webkit-scrollbar {
+      width: 6px;
+    }
+    .sbc-dropdown-list::-webkit-scrollbar-track {
+      background: #F0F4F8;
+      border-radius: 4px;
+    }
+    .sbc-dropdown-list::-webkit-scrollbar-thumb {
+      background: #B4C7D8;
+      border-radius: 4px;
+    }
+    .sbc-dropdown-list::-webkit-scrollbar-thumb:hover {
+      background: #8FAEC5;
+    }
+
+    .sbc-dropdown-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 9px 12px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--sbc-navy);
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+
+    .sbc-dropdown-item[hidden] {
+      display: none !important;
+    }
+
+    .sbc-dropdown-empty[hidden] {
+      display: none !important;
+    }
+
+    .sbc-dropdown-item:hover,
+    .sbc-dropdown-item.is-highlighted {
+      background: #EEF5FB;
+      color: var(--sbc-blue);
+    }
+
+    .sbc-dropdown-item.is-selected {
+      background: #E1EFF9;
+      color: #0A3254;
+      font-weight: 700;
+    }
+
+    .sbc-dropdown-item-check {
+      opacity: 0;
+      color: var(--sbc-blue);
+      flex-shrink: 0;
+      transition: opacity 0.15s ease;
+    }
+
+    .sbc-dropdown-item.is-selected .sbc-dropdown-item-check {
+      opacity: 1;
+    }
+
+    .sbc-dropdown-empty {
+      padding: 14px 12px;
+      font-size: 0.85rem;
+      color: var(--sbc-muted);
+      text-align: center;
     }
 
     .sbc-select-chevron {
@@ -1336,29 +1551,61 @@
 
             <!-- Campo 2: Estado -->
             <div class="sbc-field-group">
-              <label class="sbc-field-label" for="sbc-estado">Estado</label>
-              <div class="sbc-input-wrap">
+              <label class="sbc-field-label" id="sbc-label-estado" for="sbc-trigger-estado">Estado</label>
+              <div class="sbc-input-wrap sbc-dropdown-wrap" id="sbc-wrap-estado">
                 <span class="sbc-input-icon" aria-hidden="true">
                   <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 1 1 13 0c0 5.4-6.5 11-6.5 11z" />
                     <circle cx="12" cy="10" r="2.2" />
                   </svg>
                 </span>
-                <select id="sbc-estado" name="estado" class="sbc-control is-placeholder">
+                <button
+                  type="button"
+                  class="sbc-dropdown-trigger"
+                  id="sbc-trigger-estado"
+                  aria-haspopup="listbox"
+                  aria-expanded="false"
+                  aria-labelledby="sbc-label-estado sbc-trigger-estado-text"
+                >
+                  <span class="sbc-dropdown-trigger-text is-placeholder" id="sbc-trigger-estado-text">Selecione</span>
+                  <span class="sbc-select-chevron" aria-hidden="true">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M6 9l6 6 6-6" />
+                    </svg>
+                  </span>
+                </button>
+
+                <!-- Painel flutuante customizado com busca rápida -->
+                <div class="sbc-dropdown-panel" id="sbc-panel-estado" role="listbox" aria-labelledby="sbc-label-estado" hidden>
+                  <div class="sbc-dropdown-search-wrap">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <circle cx="11" cy="11" r="7" />
+                      <path d="M20 20l-3.5-3.5" />
+                    </svg>
+                    <input
+                      type="text"
+                      class="sbc-dropdown-search-input"
+                      id="sbc-search-estado"
+                      placeholder="Filtrar estado..."
+                      autocomplete="off"
+                      aria-label="Filtrar estado"
+                      onkeydown="if(event.key==='Enter'){event.preventDefault();event.stopPropagation();}"
+                    />
+                  </div>
+                  <div class="sbc-dropdown-list" id="sbc-list-estado" tabindex="-1"></div>
+                </div>
+
+                <!-- Select nativo em sincronia para parceiros e formulários -->
+                <select id="sbc-estado" name="estado" class="sbc-hidden-select" tabindex="-1" aria-hidden="true">
                   <option value="">Selecione</option>
                 </select>
-                <span class="sbc-select-chevron" aria-hidden="true">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M6 9l6 6 6-6" />
-                  </svg>
-                </span>
               </div>
             </div>
 
             <!-- Campo 3: Cidade -->
             <div class="sbc-field-group">
-              <label class="sbc-field-label" for="sbc-cidade">Cidade</label>
-              <div class="sbc-input-wrap">
+              <label class="sbc-field-label" id="sbc-label-cidade" for="sbc-trigger-cidade">Cidade</label>
+              <div class="sbc-input-wrap sbc-dropdown-wrap" id="sbc-wrap-cidade">
                 <span class="sbc-input-icon" aria-hidden="true">
                   <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                     <rect x="4" y="4" width="10" height="16" rx="1" />
@@ -1366,14 +1613,46 @@
                     <path d="M8 8h2M8 12h2M8 16h2M17 13h1M17 16h1" />
                   </svg>
                 </span>
-                <select id="sbc-cidade" name="cidade" class="sbc-control is-placeholder">
+                <button
+                  type="button"
+                  class="sbc-dropdown-trigger"
+                  id="sbc-trigger-cidade"
+                  aria-haspopup="listbox"
+                  aria-expanded="false"
+                  aria-labelledby="sbc-label-cidade sbc-trigger-cidade-text"
+                >
+                  <span class="sbc-dropdown-trigger-text is-placeholder" id="sbc-trigger-cidade-text">Selecione</span>
+                  <span class="sbc-select-chevron" aria-hidden="true">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M6 9l6 6 6-6" />
+                    </svg>
+                  </span>
+                </button>
+
+                <!-- Painel flutuante customizado com busca rápida -->
+                <div class="sbc-dropdown-panel" id="sbc-panel-cidade" role="listbox" aria-labelledby="sbc-label-cidade" hidden>
+                  <div class="sbc-dropdown-search-wrap">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <circle cx="11" cy="11" r="7" />
+                      <path d="M20 20l-3.5-3.5" />
+                    </svg>
+                    <input
+                      type="text"
+                      class="sbc-dropdown-search-input"
+                      id="sbc-search-cidade"
+                      placeholder="Filtrar cidade..."
+                      autocomplete="off"
+                      aria-label="Filtrar cidade"
+                      onkeydown="if(event.key==='Enter'){event.preventDefault();event.stopPropagation();}"
+                    />
+                  </div>
+                  <div class="sbc-dropdown-list" id="sbc-list-cidade" tabindex="-1"></div>
+                </div>
+
+                <!-- Select nativo em sincronia para parceiros e formulários -->
+                <select id="sbc-cidade" name="cidade" class="sbc-hidden-select" tabindex="-1" aria-hidden="true">
                   <option value="">Selecione</option>
                 </select>
-                <span class="sbc-select-chevron" aria-hidden="true">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M6 9l6 6 6-6" />
-                  </svg>
-                </span>
               </div>
             </div>
 
@@ -1550,22 +1829,331 @@
         selectEl.classList.toggle('is-placeholder', !selectEl.value);
       }
 
-      function populateEstados() {
-        ESTADOS_BRASIL.forEach((item) => {
-          const opt = document.createElement('option');
-          opt.value = item.uf;
-          opt.textContent = `${item.nome} (${item.uf})`;
-          selectEstado.appendChild(opt);
+      // ======================================================================
+      // DROPDOWNS CUSTOMIZADOS E FLUIDOS (ESTADO E CIDADE)
+      // ======================================================================
+      function setupCustomDropdown(config) {
+        const wrap = document.getElementById(config.wrapId);
+        const trigger = document.getElementById(config.triggerId);
+        const triggerText = document.getElementById(config.triggerTextId);
+        const panel = document.getElementById(config.panelId);
+        const searchInput = document.getElementById(config.searchInputId);
+        const listContainer = document.getElementById(config.listId);
+        const hiddenSelect = document.getElementById(config.selectId);
+
+        if (!wrap || !trigger || !panel || !listContainer || !hiddenSelect) return null;
+
+        let optionsData = [];
+        let highlightedIndex = -1;
+
+        function openPanel() {
+          document.querySelectorAll('.sbc-dropdown-wrap.is-open').forEach((otherWrap) => {
+            if (otherWrap !== wrap) {
+              otherWrap.classList.remove('is-open');
+              const otherPanel = otherWrap.querySelector('.sbc-dropdown-panel');
+              const otherTrigger = otherWrap.querySelector('.sbc-dropdown-trigger');
+              if (otherPanel) otherPanel.hidden = true;
+              if (otherTrigger) otherTrigger.setAttribute('aria-expanded', 'false');
+            }
+          });
+
+          wrap.classList.add('is-open');
+          panel.hidden = false;
+          trigger.setAttribute('aria-expanded', 'true');
+
+          if (searchInput) {
+            searchInput.value = '';
+            filterList('');
+            setTimeout(() => searchInput.focus(), 30);
+          }
+
+          scrollToSelected();
+        }
+
+        function closePanel(returnFocus) {
+          if (panel.hidden) return;
+          wrap.classList.remove('is-open');
+          panel.hidden = true;
+          trigger.setAttribute('aria-expanded', 'false');
+          highlightedIndex = -1;
+          updateHighlight();
+          if (returnFocus) {
+            trigger.focus();
+          }
+        }
+
+        function togglePanel() {
+          if (panel.hidden) {
+            openPanel();
+          } else {
+            closePanel(true);
+          }
+        }
+
+        function scrollToSelected() {
+          const selectedEl = listContainer.querySelector('.sbc-dropdown-item.is-selected');
+          if (selectedEl) {
+            selectedEl.scrollIntoView({ block: 'nearest' });
+          }
+        }
+
+        function updateHighlight() {
+          const visibleItems = Array.from(listContainer.querySelectorAll('.sbc-dropdown-item:not([hidden])'));
+          visibleItems.forEach((item, index) => {
+            if (index === highlightedIndex) {
+              item.classList.add('is-highlighted');
+              item.scrollIntoView({ block: 'nearest' });
+            } else {
+              item.classList.remove('is-highlighted');
+            }
+          });
+        }
+
+        function setOptions(items, placeholderText) {
+          optionsData = items;
+          listContainer.innerHTML = '';
+
+          // Opção inicial "Selecione" (vazia)
+          const defaultItem = document.createElement('div');
+          defaultItem.className = 'sbc-dropdown-item';
+          defaultItem.setAttribute('role', 'option');
+          defaultItem.setAttribute('data-value', '');
+          defaultItem.innerHTML = `<span>${placeholderText || 'Selecione'}</span>`;
+          defaultItem.addEventListener('click', () => {
+            selectValue('', placeholderText || 'Selecione', true);
+          });
+          listContainer.appendChild(defaultItem);
+
+          items.forEach((item) => {
+            const row = document.createElement('div');
+            row.className = 'sbc-dropdown-item';
+            row.setAttribute('role', 'option');
+            row.setAttribute('data-value', item.value);
+            row.innerHTML = `
+              <span>${item.label}</span>
+              <svg class="sbc-dropdown-item-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            `;
+            row.addEventListener('click', () => {
+              selectValue(item.value, item.label, true);
+            });
+            listContainer.appendChild(row);
+          });
+
+          // Atualizar select nativo oculto
+          hiddenSelect.innerHTML = '';
+          const optDefault = document.createElement('option');
+          optDefault.value = '';
+          optDefault.textContent = placeholderText || 'Selecione';
+          hiddenSelect.appendChild(optDefault);
+
+          items.forEach((item) => {
+            const opt = document.createElement('option');
+            opt.value = item.value;
+            opt.textContent = item.label;
+            hiddenSelect.appendChild(opt);
+          });
+
+          // Sincronizar valor atual
+          const currentVal = hiddenSelect.value;
+          selectValue(currentVal, getLabelForValue(currentVal, placeholderText), false);
+        }
+
+        function getLabelForValue(val, fallback) {
+          if (!val) return fallback || 'Selecione';
+          const found = optionsData.find((o) => o.value === val);
+          return found ? found.label : val;
+        }
+
+        function selectValue(val, displayLabel, triggerEvent) {
+          hiddenSelect.value = val;
+          const label = displayLabel || getLabelForValue(val);
+          triggerText.textContent = label;
+          triggerText.classList.toggle('is-placeholder', !val);
+
+          const allItems = listContainer.querySelectorAll('.sbc-dropdown-item');
+          allItems.forEach((el) => {
+            const isMatch = el.getAttribute('data-value') === val;
+            el.classList.toggle('is-selected', isMatch);
+            el.setAttribute('aria-selected', isMatch ? 'true' : 'false');
+          });
+
+          if (triggerEvent) {
+            closePanel(true);
+            hiddenSelect.dispatchEvent(new Event('change', { bubbles: true }));
+          }
+        }
+
+        function filterList(query) {
+          const rawQuery = (query || '').trim();
+          const cleanQuery = normalizeText(rawQuery);
+          const isTwoLetter = rawQuery.length === 2;
+          const allItems = Array.from(listContainer.querySelectorAll('.sbc-dropdown-item'));
+          let hasMatch = false;
+
+          let exactUfMatch = null;
+          if (isTwoLetter) {
+            exactUfMatch = allItems.find((el) => {
+              const val = (el.getAttribute('data-value') || '').toUpperCase();
+              return val === rawQuery.toUpperCase();
+            });
+          }
+
+          allItems.forEach((el) => {
+            const val = el.getAttribute('data-value');
+            if (val === '') {
+              el.hidden = !!cleanQuery;
+              return;
+            }
+
+            let matches = false;
+            if (exactUfMatch) {
+              matches = (el === exactUfMatch);
+            } else {
+              const text = normalizeText(el.textContent);
+              matches = !cleanQuery || text.includes(cleanQuery);
+            }
+
+            el.hidden = !matches;
+            if (matches) hasMatch = true;
+          });
+
+          let emptyNotice = listContainer.querySelector('.sbc-dropdown-empty');
+          if (!hasMatch && cleanQuery) {
+            if (!emptyNotice) {
+              emptyNotice = document.createElement('div');
+              emptyNotice.className = 'sbc-dropdown-empty';
+              emptyNotice.textContent = 'Nenhum resultado encontrado';
+              listContainer.appendChild(emptyNotice);
+            }
+            emptyNotice.hidden = false;
+          } else if (emptyNotice) {
+            emptyNotice.hidden = true;
+          }
+
+          highlightedIndex = -1;
+        }
+
+        trigger.addEventListener('click', (e) => {
+          e.preventDefault();
+          togglePanel();
         });
+
+        if (searchInput) {
+          searchInput.addEventListener('input', () => {
+            filterList(searchInput.value);
+          });
+
+          searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+              e.preventDefault();
+            }
+          });
+
+          searchInput.addEventListener('keydown', (e) => {
+            const visibleItems = Array.from(listContainer.querySelectorAll('.sbc-dropdown-item:not([hidden])'));
+
+            if (e.key === 'ArrowDown') {
+              e.preventDefault();
+              if (visibleItems.length > 0) {
+                highlightedIndex = (highlightedIndex + 1) % visibleItems.length;
+                updateHighlight();
+              }
+            } else if (e.key === 'ArrowUp') {
+              e.preventDefault();
+              if (visibleItems.length > 0) {
+                highlightedIndex = (highlightedIndex - 1 + visibleItems.length) % visibleItems.length;
+                updateHighlight();
+              }
+            } else if (e.key === 'Enter') {
+              e.preventDefault();
+              e.stopPropagation();
+              if (highlightedIndex >= 0 && visibleItems[highlightedIndex]) {
+                const item = visibleItems[highlightedIndex];
+                const val = item.getAttribute('data-value');
+                selectValue(val, item.querySelector('span') ? item.querySelector('span').textContent : item.textContent, true);
+              } else if (visibleItems.length > 0) {
+                const item = visibleItems[0];
+                const val = item.getAttribute('data-value');
+                selectValue(val, item.querySelector('span') ? item.querySelector('span').textContent : item.textContent, true);
+              }
+            } else if (e.key === 'Escape') {
+              e.preventDefault();
+              closePanel(true);
+            }
+          });
+        }
+
+        return {
+          setOptions,
+          selectValue,
+          closePanel,
+          openPanel,
+          getValue: () => hiddenSelect.value
+        };
       }
 
-      function populateCidades(ufSelecionada) {
-        selectCidade.textContent = '';
-        const defaultOpt = document.createElement('option');
-        defaultOpt.value = '';
-        defaultOpt.textContent = 'Selecione';
-        selectCidade.appendChild(defaultOpt);
+      // Fechar dropdowns ao clicar fora ou pressionar Escape
+      document.addEventListener('click', (e) => {
+        if (!e.target.closest('.sbc-dropdown-wrap')) {
+          document.querySelectorAll('.sbc-dropdown-wrap.is-open').forEach((wrap) => {
+            wrap.classList.remove('is-open');
+            const panel = wrap.querySelector('.sbc-dropdown-panel');
+            const trigger = wrap.querySelector('.sbc-dropdown-trigger');
+            if (panel) panel.hidden = true;
+            if (trigger) trigger.setAttribute('aria-expanded', 'false');
+          });
+        }
+      });
 
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          document.querySelectorAll('.sbc-dropdown-wrap.is-open').forEach((wrap) => {
+            wrap.classList.remove('is-open');
+            const panel = wrap.querySelector('.sbc-dropdown-panel');
+            const trigger = wrap.querySelector('.sbc-dropdown-trigger');
+            if (panel) panel.hidden = true;
+            if (trigger) {
+              trigger.setAttribute('aria-expanded', 'false');
+              trigger.focus();
+            }
+          });
+        }
+      });
+
+      // Inicialização dos dropdowns customizados
+      const estadoDropdown = setupCustomDropdown({
+        wrapId: 'sbc-wrap-estado',
+        triggerId: 'sbc-trigger-estado',
+        triggerTextId: 'sbc-trigger-estado-text',
+        panelId: 'sbc-panel-estado',
+        searchInputId: 'sbc-search-estado',
+        listId: 'sbc-list-estado',
+        selectId: 'sbc-estado'
+      });
+
+      const cidadeDropdown = setupCustomDropdown({
+        wrapId: 'sbc-wrap-cidade',
+        triggerId: 'sbc-trigger-cidade',
+        triggerTextId: 'sbc-trigger-cidade-text',
+        panelId: 'sbc-panel-cidade',
+        searchInputId: 'sbc-search-cidade',
+        listId: 'sbc-list-cidade',
+        selectId: 'sbc-cidade'
+      });
+
+      function carregarEstados() {
+        const estadosItems = ESTADOS_BRASIL.map((item) => ({
+          value: item.uf,
+          label: `${item.nome} (${item.uf})`
+        }));
+        if (estadoDropdown) {
+          estadoDropdown.setOptions(estadosItems, 'Selecione');
+        }
+      }
+
+      function carregarCidades(ufSelecionada) {
         let listaCidades = [];
 
         if (ufSelecionada) {
@@ -1575,14 +2163,14 @@
           listaCidades = ESTADOS_BRASIL.flatMap((e) => e.cidades).sort((a, b) => a.localeCompare(b, 'pt-BR'));
         }
 
-        listaCidades.forEach((cidade) => {
-          const opt = document.createElement('option');
-          opt.value = cidade;
-          opt.textContent = cidade;
-          selectCidade.appendChild(opt);
-        });
+        const cidadesItems = listaCidades.map((cidade) => ({
+          value: cidade,
+          label: cidade
+        }));
 
-        syncSelectPlaceholder(selectCidade);
+        if (cidadeDropdown) {
+          cidadeDropdown.setOptions(cidadesItems, 'Selecione');
+        }
       }
 
       function createMetaLine(label, value) {
@@ -1690,54 +2278,127 @@
       }
 
       selectEstado.addEventListener('change', () => {
-        syncSelectPlaceholder(selectEstado);
-        populateCidades(selectEstado.value);
-      });
-
-      selectCidade.addEventListener('change', () => {
-        syncSelectPlaceholder(selectCidade);
+        carregarCidades(selectEstado.value);
+        if (cidadeDropdown) {
+          cidadeDropdown.selectValue('', 'Selecione', false);
+        }
       });
 
       let geoRequestId = 0;
 
+      // Prevenir submissão acidental do form ao teclar Enter nos inputs de filtro dos dropdowns
+      form.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && e.target && (e.target.classList.contains('sbc-dropdown-search-input') || e.target.classList.contains('sbc-dropdown-trigger'))) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+      }, true);
+
+      // ======================================================================
+      // SUBMISSÃO DO FORMULÁRIO DE BUSCA (REDIRECIONA PARA O PORTAL OFICIAL)
+      // ======================================================================
       form.addEventListener('submit', (event) => {
+        if (document.activeElement && document.activeElement.classList.contains('sbc-dropdown-search-input')) {
+          event.preventDefault();
+          event.stopPropagation();
+          return;
+        }
+
         event.preventDefault();
-        window.open('https://encontre-especialista-sbc.pages.dev/', '_top');
+        const uf = selectEstado.value;
+        const cidade = selectCidade.value;
+        const nome = (inputNome.value || '').trim();
+
+        if (!uf && !cidade && !nome) {
+          window.open('https://encontre-especialista-sbc.pages.dev/', '_top');
+          return;
+        }
+
+        const params = new URLSearchParams();
+        if (uf) params.set('uf', uf);
+        if (cidade) params.set('cidade', cidade);
+        if (nome) params.set('nome', nome);
+
+        window.open(`https://encontre-especialista-sbc.pages.dev/?${params.toString()}`, '_top');
       });
 
+      // ======================================================================
+      // GEOLOCALIZAÇÃO: USAR MINHA LOCALIZAÇÃO (EXATAMENTE COMO NO INDEX.HTML)
+      // ======================================================================
       btnLocation.addEventListener('click', () => {
         if (btnLocation.disabled) return;
         const currentGeoRequest = ++geoRequestId;
 
-        const applySimulatedLocation = (statusMsg) => {
+        const applyLocation = (uf, cidade, statusMsg) => {
           btnLocation.disabled = false;
           btnLocation.removeAttribute('aria-busy');
           if (currentGeoRequest !== geoRequestId) return;
-          selectEstado.value = 'SP';
-          syncSelectPlaceholder(selectEstado);
-          populateCidades('SP');
-          selectCidade.value = 'São Paulo';
-          syncSelectPlaceholder(selectCidade);
+
+          // Selecionar estado no dropdown customizado e no select nativo
+          if (estadoDropdown) {
+            estadoDropdown.selectValue(uf, null, false);
+          } else {
+            selectEstado.value = uf;
+          }
+
+          // Carregar cidades correspondentes
+          carregarCidades(uf);
+
+          // Selecionar cidade se encontrada
+          if (cidade) {
+            if (cidadeDropdown) {
+              cidadeDropdown.selectValue(cidade, cidade, false);
+            } else {
+              selectCidade.value = cidade;
+            }
+          }
+
           locationStatus.textContent = statusMsg;
-          runSearch('São Paulo, SP');
+          runSearch(`${cidade ? cidade + ', ' : ''}${uf}`);
         };
 
         if (!navigator.geolocation) {
-          applySimulatedLocation('Localização simulada: São Paulo, SP (demo)');
+          applyLocation('SP', 'São Paulo', 'Localização aproximada aplicada: São Paulo, SP (demo)');
           return;
         }
 
         btnLocation.disabled = true;
         btnLocation.setAttribute('aria-busy', 'true');
         locationStatus.textContent = 'Detectando localização...';
+
+        const geoTimeout = setTimeout(() => {
+          applyLocation('SP', 'São Paulo', 'Localização aproximada aplicada: São Paulo, SP (demo)');
+        }, 3800);
+
         navigator.geolocation.getCurrentPosition(
-          () => {
-            applySimulatedLocation('Localização aproximada aplicada: São Paulo, SP (demo)');
+          (pos) => {
+            clearTimeout(geoTimeout);
+            const lat = pos.coords.latitude;
+            const lon = pos.coords.longitude;
+
+            // Tentativa rápida de reverse geocoding para estados e cidades do Brasil
+            fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${encodeURIComponent(lat)}&longitude=${encodeURIComponent(lon)}&localityLanguage=pt`)
+              .then((res) => res.json())
+              .then((info) => {
+                const rawUf = (info.principalSubdivisionCode || '').replace(/^BR-/, '').toUpperCase();
+                const ufValida = ESTADOS_BRASIL.some((e) => e.uf === rawUf) ? rawUf : 'SP';
+                const cidadeDetectada = info.city || info.locality || (ufValida === 'SP' ? 'São Paulo' : '');
+
+                applyLocation(
+                  ufValida,
+                  cidadeDetectada,
+                  `Localização detectada: ${cidadeDetectada ? cidadeDetectada + ', ' : ''}${ufValida}`
+                );
+              })
+              .catch(() => {
+                applyLocation('SP', 'São Paulo', 'Localização aproximada aplicada: São Paulo, SP (demo)');
+              });
           },
           () => {
-            applySimulatedLocation('Localização simulada: São Paulo, SP (demo)');
+            clearTimeout(geoTimeout);
+            applyLocation('SP', 'São Paulo', 'Localização aproximada aplicada: São Paulo, SP (demo)');
           },
-          { timeout: 4000 }
+          { timeout: 3500, enableHighAccuracy: false }
         );
       });
 
@@ -1747,11 +2408,10 @@
         heroVideo.removeAttribute('autoplay');
       }
 
-      populateEstados();
-      populateCidades('');
-      syncSelectPlaceholder(selectEstado);
+      // Inicializar opções
+      carregarEstados();
+      carregarCidades('');
     })();
-  </script>
   </script>
 </body>
 </html>
