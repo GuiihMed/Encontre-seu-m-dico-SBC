@@ -76,130 +76,6 @@
       z-index: 4;
     }
 
-    /* ==========================================================================
-       CABEÇALHO INSTITUCIONAL DA SBC
-       ========================================================================== */
-    .sbc-top-bar {
-      width: 100%;
-      height: 38px;
-      background-color: #253575;
-    }
-
-    .sbc-header {
-      width: 100%;
-      background-color: #FFFFFF;
-      border-bottom: 1px solid rgba(226, 232, 240, 0.8);
-      position: relative;
-      z-index: 10;
-    }
-
-    .sbc-header-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 94px;
-      gap: 20px;
-    }
-
-    .sbc-header-brand {
-      display: flex;
-      align-items: center;
-    }
-
-    .sbc-header-logo {
-      height: 64px;
-      width: auto;
-      object-fit: contain;
-      transition: transform 0.2s ease;
-    }
-
-    .sbc-header-logo:hover {
-      transform: scale(1.02);
-    }
-
-    .sbc-header-actions {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .sbc-btn-header-outline {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      height: 40px;
-      padding: 0 22px;
-      border: 1.5px solid #253575;
-      border-radius: 999px;
-      font-size: 0.86rem;
-      font-weight: 600;
-      color: #253575;
-      background-color: transparent;
-      text-decoration: none;
-      box-shadow: 0 2px 6px rgba(37, 53, 117, 0.08);
-      transition: all 0.25s ease;
-      white-space: nowrap;
-    }
-
-    .sbc-btn-header-outline:hover {
-      background-color: rgba(37, 53, 117, 0.06);
-      color: #102C6B;
-      box-shadow: 0 4px 10px rgba(37, 53, 117, 0.15);
-      transform: translateY(-1px);
-    }
-
-    .sbc-btn-header-solid {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      height: 40px;
-      padding: 0 22px;
-      border: none;
-      border-radius: 999px;
-      font-size: 0.86rem;
-      font-weight: 600;
-      color: #FFFFFF;
-      background-color: #253575;
-      text-decoration: none;
-      box-shadow: 0 3px 8px rgba(37, 53, 117, 0.22);
-      transition: all 0.25s ease;
-      white-space: nowrap;
-    }
-
-    .sbc-btn-header-solid:hover {
-      background-color: #1c2a61;
-      box-shadow: 0 5px 14px rgba(37, 53, 117, 0.32);
-      transform: translateY(-1px);
-    }
-
-    .sbc-btn-header-home {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      height: 40px;
-      padding: 0 18px;
-      margin-left: 10px;
-      font-size: 0.86rem;
-      font-weight: 600;
-      color: #253575;
-      background: #FFFFFF;
-      border: 1px solid rgba(226, 232, 240, 0.95);
-      border-radius: 999px;
-      text-decoration: none;
-      box-shadow: 0 2px 8px rgba(16, 44, 107, 0.08);
-      transition: all 0.25s ease;
-      white-space: nowrap;
-    }
-
-    .sbc-btn-header-home:hover {
-      background: #F8FAFD;
-      color: #102C6B;
-      border-color: #CBD5E1;
-      box-shadow: 0 4px 12px rgba(16, 44, 107, 0.14);
-      transform: translateY(-1px);
-    }
-
     /* ======================================================================
        SEÇÃO 1: HERO + CARD DE BUSCA
        ====================================================================== */
@@ -475,7 +351,7 @@
       border-radius: var(--sbc-radius-lg);
       box-shadow: var(--sbc-card-shadow);
       border: 1px solid rgba(213, 227, 240, 0.75);
-      padding: 22px 26px 16px;
+      padding: 22px 26px;
     }
 
     .sbc-search-form {
@@ -485,7 +361,8 @@
       align-items: end;
     }
 
-    .sbc-field-group {
+    .sbc-field-group,
+    .sbc-action-group {
       display: flex;
       flex-direction: column;
       gap: 7px;
@@ -796,6 +673,7 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
+      width: 100%;
       height: 46px;
       padding: 0 34px;
       border: none;
@@ -856,29 +734,41 @@
       transform: translateX(3px);
     }
 
+    .sbc-btn-location {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      min-height: 20px;
+      background: none;
+      border: none;
+      border-radius: 6px;
+      padding: 0 4px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      line-height: 1.3;
+      color: var(--sbc-blue);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: color 0.2s ease, opacity 0.2s ease;
+    }
+
+    .sbc-btn-location:disabled {
+      opacity: 0.6;
+      cursor: wait;
+    }
+
     .sbc-search-footer {
-      margin-top: 14px;
+      margin-top: 10px;
       display: flex;
       align-items: center;
-      justify-content: flex-start;
+      justify-content: flex-end;
       gap: 12px;
       flex-wrap: wrap;
     }
 
-    .sbc-btn-location {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      min-height: 36px;
-      background: none;
-      border: none;
-      border-radius: 6px;
-      padding: 6px 4px;
-      font-size: 0.84rem;
-      font-weight: 600;
-      color: var(--sbc-blue);
-      cursor: pointer;
-      transition: color 0.2s ease;
+    .sbc-search-footer:has(.sbc-location-status:empty) {
+      display: none;
     }
 
     @media (pointer: coarse) {
@@ -888,7 +778,7 @@
       }
 
       .sbc-btn-location {
-        min-height: 44px;
+        min-height: 36px;
       }
     }
 
@@ -899,130 +789,6 @@
     .sbc-location-status {
       font-size: 0.8rem;
       color: var(--sbc-muted);
-    }
-
-    /* Painel de Demonstração de Resultados (Fictício até chegada do embed) */
-    #sbc-busca-demo-resultados {
-      display: none;
-      margin-top: 18px;
-      background: #FFFFFF;
-      border: 1px solid #D5E3F0;
-      border-radius: var(--sbc-radius-lg);
-      padding: 20px 24px;
-      box-shadow: 0 8px 24px rgba(10, 50, 84, 0.06);
-    }
-
-    #sbc-busca-demo-resultados.is-visible {
-      display: block;
-      animation: sbcFadeIn 0.22s ease;
-    }
-
-    @keyframes sbcFadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(6px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .sbc-demo-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      flex-wrap: wrap;
-      padding-bottom: 14px;
-      margin-bottom: 16px;
-      border-bottom: 1px solid #E6EFF7;
-    }
-
-    .sbc-demo-title-wrap {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .sbc-demo-title {
-      margin: 0;
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--sbc-navy);
-    }
-
-    .sbc-demo-badge {
-      display: inline-flex;
-      align-items: center;
-      font-size: 0.72rem;
-      font-weight: 600;
-      color: var(--sbc-blue);
-      background: #EAF3FB;
-      border: 1px solid #CFE2F3;
-      border-radius: 999px;
-      padding: 3px 10px;
-    }
-
-    .sbc-demo-clear {
-      background: none;
-      border: 1px solid #D5E3F0;
-      border-radius: 999px;
-      padding: 5px 14px;
-      font-size: 0.78rem;
-      font-weight: 600;
-      color: var(--sbc-text);
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .sbc-demo-clear:hover {
-      border-color: var(--sbc-blue);
-      color: var(--sbc-navy);
-    }
-
-    .sbc-demo-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-    }
-
-    .sbc-doctor-card {
-      background: #F9FCFF;
-      border: 1px solid #DCE8F4;
-      border-radius: var(--sbc-radius-md);
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .sbc-doctor-name {
-      margin: 0;
-      font-size: 0.96rem;
-      font-weight: 700;
-      color: var(--sbc-navy);
-    }
-
-    .sbc-doctor-crm {
-      font-size: 0.78rem;
-      font-weight: 600;
-      color: var(--sbc-blue);
-    }
-
-    .sbc-doctor-meta {
-      margin: 2px 0 0;
-      font-size: 0.82rem;
-      line-height: 1.45;
-      color: var(--sbc-text);
-    }
-
-    .sbc-demo-empty {
-      padding: 16px 0;
-      text-align: center;
-      font-size: 0.9rem;
-      color: var(--sbc-text);
     }
 
     /* ======================================================================
@@ -1469,110 +1235,6 @@
       transform: translateX(3px);
     }
 
-    /* ==========================================================================
-       RODAPÉ INSTITUCIONAL DA SBC
-       ========================================================================== */
-    .sbc-footer {
-      background-color: #102C6B;
-      color: #FFFFFF;
-      padding: 46px 0 40px;
-      position: relative;
-      z-index: 5;
-    }
-
-    .sbc-footer-inner {
-      display: grid;
-      grid-template-columns: 1.3fr 1fr 1.3fr 0.5fr;
-      gap: 36px;
-      align-items: center;
-    }
-
-    .sbc-footer-logo-wrap {
-      display: flex;
-      align-items: center;
-    }
-
-    .sbc-footer-logo {
-      height: 80px;
-      width: auto;
-      object-fit: contain;
-      transition: transform 0.2s ease;
-    }
-
-    .sbc-footer-logo:hover {
-      transform: scale(1.02);
-    }
-
-    .sbc-footer-contacts {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .sbc-footer-contact-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 0.86rem;
-      color: #FFFFFF;
-      text-decoration: none;
-      transition: opacity 0.2s ease;
-    }
-
-    .sbc-footer-contact-item:hover {
-      opacity: 0.85;
-      color: #FFFFFF;
-    }
-
-    .sbc-footer-contact-item svg {
-      flex-shrink: 0;
-      color: #FFFFFF;
-    }
-
-    .sbc-footer-address {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      font-size: 0.86rem;
-      font-style: normal;
-      line-height: 1.5;
-      color: #FFFFFF;
-    }
-
-    .sbc-footer-address svg {
-      flex-shrink: 0;
-      margin-top: 3px;
-      color: #FFFFFF;
-    }
-
-    .sbc-footer-socials {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 12px;
-    }
-
-    .sbc-footer-social-link {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 28px;
-      height: 28px;
-      color: #FFFFFF;
-      transition: transform 0.2s ease, opacity 0.2s ease;
-    }
-
-    .sbc-footer-social-link:hover {
-      transform: scale(1.15);
-      opacity: 0.9;
-    }
-
-    .sbc-footer-bottom-bar {
-      width: 100%;
-      height: 28px;
-      background-color: #0D2040;
-    }
-
     /* ======================================================================
        RESPONSIVIDADE (TABLET & MOBILE)
        ====================================================================== */
@@ -1629,10 +1291,6 @@
       }
 
       .sbc-info-cards {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .sbc-demo-grid {
         grid-template-columns: repeat(2, 1fr);
       }
     }
@@ -1995,28 +1653,8 @@
         line-height: 1.42;
       }
 
-      .sbc-demo-grid {
-        grid-template-columns: 1fr;
-        gap: 12px;
-      }
-
-      .sbc-header-logo {
-        height: 52px;
-      }
-
-      .sbc-footer-logo {
-        height: 68px;
-      }
-
-      .sbc-footer-inner {
-        grid-template-columns: 1fr;
-        gap: 26px;
-      }
-
-      .sbc-footer-socials {
-        align-items: flex-start;
-        flex-direction: row;
-        gap: 16px;
+      .sbc-search-footer {
+        justify-content: center;
       }
     }
 
@@ -2032,38 +1670,6 @@
   </style>
 </head>
 <body>
-  <div class="sbc-top-bar" aria-hidden="true"></div>
-  <header class="sbc-header" role="banner">
-    <div class="sbc-container">
-      <div class="sbc-header-inner">
-        <!-- Logotipo Oficial da SBC (Logo Azul) -->
-        <a href="https://www.coluna.com.br/" class="sbc-header-brand" title="Sociedade Brasileira de Coluna">
-          <img src="https://static.wixstatic.com/media/1d3d47_6fe522c08abe4a92b44b9e4a5da97326~mv2.png" alt="SBC - Sociedade Brasileira de Coluna" class="sbc-header-logo">
-        </a>
-
-        <!-- Ações do Cabeçalho -->
-        <nav class="sbc-header-actions" aria-label="Navegação institucional">
-          <a href="https://login.sociedademedica.online/?idOrg=59&token=6435345777&urlRetorno=https://app.associatec.com.br/AreaAssociados/sbc?returnUrl=https://app.associatec.com.br/AreaAssociados/AssociadoCobrancas/HistoricoCobrancas" target="_blank" rel="noopener noreferrer" class="sbc-btn-header-outline">
-            Anuidade 2026
-          </a>
-          <a href="https://login.sociedademedica.online/?idOrg=59&token=6435345777&urlRetorno=https://app.associatec.com.br/AreaAssociados/sbc?returnUrl=https://app.associatec.com.br/AreaAssociados/AssociadoCobrancas/HistoricoCobrancas" target="_blank" rel="noopener noreferrer" class="sbc-btn-header-solid">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-              <circle cx="12" cy="7" r="4"></circle>
-            </svg>
-            <span>Área do Associado</span>
-          </a>
-          <a href="https://www.coluna.com.br/" target="_top" class="sbc-btn-header-home">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-              <polyline points="9 22 9 12 15 12 15 22"></polyline>
-            </svg>
-            <span>Voltar ao Site</span>
-          </a>
-        </nav>
-      </div>
-    </div>
-  </header>
   <main>
 
   <!-- ======================================================================
@@ -2298,35 +1904,33 @@
               </div>
             </div>
 
-            <!-- Botão Buscar -->
-            <button type="submit" class="sbc-btn-buscar">
-              <span>Buscar</span>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M5 12h14" />
-                <path d="M13 6l6 6-6 6" />
-              </svg>
-            </button>
+            <!-- Coluna 4: Usar minha localização + Botão Buscar -->
+            <div class="sbc-action-group">
+              <button type="button" class="sbc-btn-location" id="sbc-btn-location">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <circle cx="12" cy="12" r="7" />
+                  <circle cx="12" cy="12" r="2.5" />
+                  <path d="M12 2v3M12 19v3M2 12h3M19 12h3" />
+                </svg>
+                <span>Usar minha localização</span>
+              </button>
+              <button type="submit" class="sbc-btn-buscar">
+                <span>Buscar</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M5 12h14" />
+                  <path d="M13 6l6 6-6 6" />
+                </svg>
+              </button>
+            </div>
           </form>
 
-          <!-- Linha inferior do card (somente geolocalização) -->
+          <!-- Linha inferior do card: status da geolocalização -->
           <div class="sbc-search-footer">
-            <button type="button" class="sbc-btn-location" id="sbc-btn-location">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <circle cx="12" cy="12" r="7" />
-                <circle cx="12" cy="12" r="2.5" />
-                <path d="M12 2v3M12 19v3M2 12h3M19 12h3" />
-              </svg>
-              <span>Usar minha localização</span>
-            </button>
             <span class="sbc-location-status" id="sbc-location-status" aria-live="polite"></span>
           </div>
           </search>
         </div>
-
-        <!-- Resultados fictícios de demonstração -->
-        <div id="sbc-busca-demo-resultados"></div>
       </div>
-      <!-- FIM DO EMBED DE BUSCA -->
       <!-- FIM DO EMBED DE BUSCA -->
     </div>
   </section>
@@ -2664,79 +2268,8 @@
   </section>
   </main>
 
-  <!-- ========================================================================
-       RODAPÉ INSTITUCIONAL DA SBC
-       ======================================================================== -->
-  <footer class="sbc-footer" role="contentinfo">
-    <div class="sbc-container">
-      <div class="sbc-footer-inner">
-        <!-- Coluna 1: Logotipo Negativo SBC (Logo Branca) -->
-        <div class="sbc-footer-logo-wrap">
-          <a href="https://www.coluna.com.br/" title="Sociedade Brasileira de Coluna">
-            <img src="https://static.wixstatic.com/media/8ef88b_7ef5a3bfda414f73a571303a546b7c3c~mv2.png" alt="SBC - Sociedade Brasileira de Coluna" class="sbc-footer-logo">
-          </a>
-        </div>
-
-        <!-- Coluna 2: Canais de Contato Direto -->
-        <div class="sbc-footer-contacts">
-          <a href="tel:+5511974912087" class="sbc-footer-contact-item">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-            </svg>
-            <span>(11) 97491-2087</span>
-          </a>
-          <a href="mailto:coluna@coluna.com.br" class="sbc-footer-contact-item">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-              <polyline points="22,6 12,13 2,6"></polyline>
-            </svg>
-            <span>coluna@coluna.com.br</span>
-          </a>
-        </div>
-
-        <!-- Coluna 3: Endereço da Sede -->
-        <address class="sbc-footer-address">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-            <circle cx="12" cy="10" r="3"></circle>
-          </svg>
-          <div>
-            Alameda Lorena, 1304, Conjuntos<br>
-            1406/1407 - Jardim Paulista – São<br>
-            Paulo, SP - CEP 01424-906
-          </div>
-        </address>
-
-        <!-- Coluna 4: Redes Sociais Oficiais -->
-        <div class="sbc-footer-socials">
-          <!-- Instagram -->
-          <a href="https://www.instagram.com/sbc_coluna/" target="_blank" rel="noopener noreferrer" class="sbc-footer-social-link" aria-label="Instagram da SBC">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-            </svg>
-          </a>
-          <!-- Facebook -->
-          <a href="https://www.facebook.com/sbcoluna" target="_blank" rel="noopener noreferrer" class="sbc-footer-social-link" aria-label="Facebook da SBC">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-            </svg>
-          </a>
-          <!-- YouTube -->
-          <a href="https://www.youtube.com/@sociedadebrasileiradecoluna" target="_blank" rel="noopener noreferrer" class="sbc-footer-social-link" aria-label="YouTube da SBC">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path>
-              <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="#102C6B"></polygon>
-            </svg>
-          </a>
-        </div>
-      </div>
-    </div>
-  </footer>
-
   <!-- ======================================================================
-       JAVASCRIPT: BUSCA FICTÍCIA DE DEMONSTRAÇÃO (MODULAR / REMOVÍVEL)
+       JAVASCRIPT: DROPDOWNS CUSTOMIZADOS, CIDADES E GEOLOCALIZAÇÃO
        ====================================================================== -->
   <script>
     (function () {
@@ -2770,17 +2303,8 @@
         { uf: 'TO', nome: 'Tocantins', cidades: ['Palmas', 'Araguaína'] }
       ];
 
-      const MEDICOS_DEMO = [
-        { nome: 'Dr. Carlos Eduardo Mendes', crm: 'CRM-SP 128.450 | Membro Titular SBC', estado: 'SP', cidade: 'São Paulo', area: 'Cirurgia da Coluna Vertebral', endereco: 'Av. Paulista, 1842 — Bela Vista' },
-        { nome: 'Dra. Mariana Albuquerque', crm: 'CRM-SP 149.210 | Membro Titular SBC', estado: 'SP', cidade: 'Campinas', area: 'Ortopedia e Coluna', endereco: 'Av. José de Souza Campos, 920 — Cambuí' },
-        { nome: 'Dr. Rafael Nogueira Lima', crm: 'CRM-RJ 52.89341 | Membro Titular SBC', estado: 'RJ', cidade: 'Rio de Janeiro', area: 'Neurocirurgia / Coluna', endereco: 'Rua Visconde de Pirajá, 414 — Ipanema' },
-        { nome: 'Dra. Fernanda Vasconcelos', crm: 'CRM-MG 61.332 | Membro Titular SBC', estado: 'MG', cidade: 'Belo Horizonte', area: 'Cirurgia Minimamente Invasiva da Coluna', endereco: 'Av. do Contorno, 4747 — Funcionários' },
-        { nome: 'Dr. Gustavo Henrique Becker', crm: 'CRM-RS 34.918 | Membro Titular SBC', estado: 'RS', cidade: 'Porto Alegre', area: 'Deformidades e Saúde da Coluna', endereco: 'Rua Ramiro Barcelos, 910 — Moinhos de Vento' },
-        { nome: 'Dr. Lucas Prado Bittencourt', crm: 'CRM-PR 29.104 | Membro Titular SBC', estado: 'PR', cidade: 'Curitiba', area: 'Ortopedia e Cirurgia da Coluna', endereco: 'Av. Batel, 1230 — Batel' },
-        { nome: 'Dra. Patrícia Souza Andrade', crm: 'CRM-BA 24.715 | Membro Titular SBC', estado: 'BA', cidade: 'Salvador', area: 'Tratamento Clínico e Cirúrgico da Coluna', endereco: 'Av. Anita Garibaldi, 1815 — Ondina' },
-        { nome: 'Dr. Bruno Tavares Moreira', crm: 'CRM-DF 19.502 | Membro Titular SBC', estado: 'DF', cidade: 'Brasília', area: 'Cirurgia da Coluna Vertebral', endereco: 'SGAS 616 — Asa Sul' },
-        { nome: 'Dra. Camila Cavalcanti', crm: 'CRM-PE 21.840 | Membro Titular SBC', estado: 'PE', cidade: 'Recife', area: 'Ortopedia e Coluna', endereco: 'Rua da Hora, 712 — Espinheiro' }
-      ];
+      const RESULTADOS_URL = 'https://encontre-especialista-sbc.pages.dev/';
+      const API_CIDADES_URL = RESULTADOS_URL + 'api/cidades?uf=';
 
       const form = document.getElementById('sbc-search-form');
       const inputNome = document.getElementById('sbc-nome');
@@ -2788,7 +2312,9 @@
       const selectCidade = document.getElementById('sbc-cidade');
       const btnLocation = document.getElementById('sbc-btn-location');
       const locationStatus = document.getElementById('sbc-location-status');
-      const resultsBox = document.getElementById('sbc-busca-demo-resultados');
+
+      const cacheCidades = {};
+      let pedidoCidadesAtual = 0;
 
       if (!form || !selectEstado || !selectCidade) return;
 
@@ -3135,16 +2661,7 @@
         }
       }
 
-      function carregarCidades(ufSelecionada) {
-        let listaCidades = [];
-
-        if (ufSelecionada) {
-          const found = ESTADOS_BRASIL.find((e) => e.uf === ufSelecionada);
-          if (found) listaCidades = found.cidades;
-        } else {
-          listaCidades = ESTADOS_BRASIL.flatMap((e) => e.cidades).sort((a, b) => a.localeCompare(b, 'pt-BR'));
-        }
-
+      function preencherOpcoesCidade(listaCidades, cidadeAlvo) {
         const cidadesItems = listaCidades.map((cidade) => ({
           value: cidade,
           label: cidade
@@ -3153,110 +2670,49 @@
         if (cidadeDropdown) {
           cidadeDropdown.setOptions(cidadesItems, 'Selecione');
         }
-      }
 
-      function createMetaLine(label, value) {
-        const p = document.createElement('p');
-        p.className = 'sbc-doctor-meta';
-        if (label) {
-          const strong = document.createElement('strong');
-          strong.textContent = label + ' ';
-          p.appendChild(strong);
+        if (cidadeAlvo) {
+          const alvoNorm = normalizeText(cidadeAlvo);
+          const match = listaCidades.find((c) => normalizeText(c) === alvoNorm) || cidadeAlvo;
+          if (cidadeDropdown) {
+            cidadeDropdown.selectValue(match, match, false);
+          } else {
+            selectCidade.value = match;
+          }
         }
-        p.appendChild(document.createTextNode(value));
-        return p;
       }
 
-      function renderDemoResults(lista, contextLabel) {
-        if (!resultsBox) return;
+      function carregarCidades(ufSelecionada, cidadeAlvo) {
+        const pedido = ++pedidoCidadesAtual;
 
-        resultsBox.textContent = '';
+        if (!ufSelecionada) {
+          const todas = ESTADOS_BRASIL.flatMap((e) => e.cidades).sort((a, b) => a.localeCompare(b, 'pt-BR'));
+          preencherOpcoesCidade(todas, cidadeAlvo);
+          return;
+        }
 
-        const countText =
-          lista.length === 1
-            ? '1 médico encontrado'
-            : `${lista.length} médicos encontrados`;
+        const fallbackEstado = ESTADOS_BRASIL.find((e) => e.uf === ufSelecionada);
+        const listaFallback = fallbackEstado ? fallbackEstado.cidades : [];
 
-        const header = document.createElement('div');
-        header.className = 'sbc-demo-header';
+        if (cacheCidades[ufSelecionada]) {
+          preencherOpcoesCidade(cacheCidades[ufSelecionada], cidadeAlvo);
+          return;
+        }
 
-        const titleWrap = document.createElement('div');
-        titleWrap.className = 'sbc-demo-title-wrap';
+        // Preenche imediatamente com fallback enquanto consulta a API oficial
+        preencherOpcoesCidade(listaFallback, cidadeAlvo);
 
-        const title = document.createElement('h2');
-        title.className = 'sbc-demo-title';
-        title.setAttribute('aria-live', 'polite');
-        title.textContent = `${countText}${contextLabel ? ` — ${contextLabel}` : ''}`;
-
-        const badge = document.createElement('span');
-        badge.className = 'sbc-demo-badge';
-        badge.textContent = 'Modo demonstração (aguardando embed oficial)';
-
-        titleWrap.append(title, badge);
-
-        const clearBtn = document.createElement('button');
-        clearBtn.type = 'button';
-        clearBtn.className = 'sbc-demo-clear';
-        clearBtn.id = 'sbc-demo-clear-btn';
-        clearBtn.textContent = 'Fechar pré-visualização';
-        clearBtn.addEventListener('click', () => {
-          resultsBox.classList.remove('is-visible');
-          resultsBox.textContent = '';
-          inputNome.focus();
-        });
-
-        header.append(titleWrap, clearBtn);
-        resultsBox.appendChild(header);
-
-        if (lista.length) {
-          const grid = document.createElement('div');
-          grid.className = 'sbc-demo-grid';
-          lista.forEach((med) => {
-            const card = document.createElement('article');
-            card.className = 'sbc-doctor-card';
-
-            const name = document.createElement('h3');
-            name.className = 'sbc-doctor-name';
-            name.textContent = med.nome;
-
-            const crm = document.createElement('span');
-            crm.className = 'sbc-doctor-crm';
-            crm.textContent = med.crm;
-
-            card.append(
-              name,
-              crm,
-              createMetaLine('Especialidade:', med.area),
-              createMetaLine('Local:', `${med.cidade} - ${med.estado}`),
-              createMetaLine('', med.endereco)
-            );
-            grid.appendChild(card);
+        fetch(API_CIDADES_URL + encodeURIComponent(ufSelecionada))
+          .then((r) => r.json())
+          .then((dados) => {
+            if (pedido !== pedidoCidadesAtual) return;
+            if (!dados || !dados.ok || !Array.isArray(dados.cidades) || !dados.cidades.length) return;
+            cacheCidades[ufSelecionada] = dados.cidades;
+            preencherOpcoesCidade(dados.cidades, cidadeAlvo || selectCidade.value);
+          })
+          .catch(() => {
+            // Mantém a lista de fallback caso a API não responda
           });
-          resultsBox.appendChild(grid);
-        } else {
-          const empty = document.createElement('div');
-          empty.className = 'sbc-demo-empty';
-          empty.textContent =
-            'Nenhum médico fictício encontrado para os filtros selecionados. Tente limpar os campos para testar todos os exemplos.';
-          resultsBox.appendChild(empty);
-        }
-
-        resultsBox.classList.add('is-visible');
-      }
-
-      function runSearch(contextLabel) {
-        const nomeQuery = normalizeText(inputNome.value);
-        const ufQuery = selectEstado.value;
-        const cidadeQuery = normalizeText(selectCidade.value);
-
-        const filtered = MEDICOS_DEMO.filter((med) => {
-          const matchNome = !nomeQuery || normalizeText(med.nome).includes(nomeQuery);
-          const matchUf = !ufQuery || med.estado === ufQuery;
-          const matchCidade = !cidadeQuery || normalizeText(med.cidade) === cidadeQuery;
-          return matchNome && matchUf && matchCidade;
-        });
-
-        renderDemoResults(filtered, contextLabel);
       }
 
       selectEstado.addEventListener('change', () => {
@@ -3292,7 +2748,7 @@
         const nome = (inputNome.value || '').trim();
 
         if (!uf && !cidade && !nome) {
-          window.open('https://encontre-especialista-sbc.pages.dev/', '_top');
+          window.open(RESULTADOS_URL, '_top');
           return;
         }
 
@@ -3301,11 +2757,11 @@
         if (cidade) params.set('cidade', cidade);
         if (nome) params.set('nome', nome);
 
-        window.open(`https://encontre-especialista-sbc.pages.dev/?${params.toString()}`, '_top');
+        window.open(`${RESULTADOS_URL}?${params.toString()}`, '_top');
       });
 
       // ======================================================================
-      // GEOLOCALIZAÇÃO: USAR MINHA LOCALIZAÇÃO (EXATAMENTE COMO NO INDEX.HTML)
+      // GEOLOCALIZAÇÃO: USAR MINHA LOCALIZAÇÃO
       // ======================================================================
       btnLocation.addEventListener('click', () => {
         if (btnLocation.disabled) return;
@@ -3323,24 +2779,14 @@
             selectEstado.value = uf;
           }
 
-          // Carregar cidades correspondentes
-          carregarCidades(uf);
-
-          // Selecionar cidade se encontrada
-          if (cidade) {
-            if (cidadeDropdown) {
-              cidadeDropdown.selectValue(cidade, cidade, false);
-            } else {
-              selectCidade.value = cidade;
-            }
-          }
+          // Carregar cidades correspondentes e selecionar cidade detectada
+          carregarCidades(uf, cidade);
 
           locationStatus.textContent = statusMsg;
-          runSearch(`${cidade ? cidade + ', ' : ''}${uf}`);
         };
 
         if (!navigator.geolocation) {
-          applyLocation('SP', 'São Paulo', 'Localização aproximada aplicada: São Paulo, SP (demo)');
+          applyLocation('SP', 'São Paulo', 'Localização aproximada aplicada: São Paulo, SP');
           return;
         }
 
@@ -3349,7 +2795,7 @@
         locationStatus.textContent = 'Detectando localização...';
 
         const geoTimeout = setTimeout(() => {
-          applyLocation('SP', 'São Paulo', 'Localização aproximada aplicada: São Paulo, SP (demo)');
+          applyLocation('SP', 'São Paulo', 'Localização aproximada aplicada: São Paulo, SP');
         }, 3800);
 
         navigator.geolocation.getCurrentPosition(
@@ -3373,12 +2819,12 @@
                 );
               })
               .catch(() => {
-                applyLocation('SP', 'São Paulo', 'Localização aproximada aplicada: São Paulo, SP (demo)');
+                applyLocation('SP', 'São Paulo', 'Localização aproximada aplicada: São Paulo, SP');
               });
           },
           () => {
             clearTimeout(geoTimeout);
-            applyLocation('SP', 'São Paulo', 'Localização aproximada aplicada: São Paulo, SP (demo)');
+            applyLocation('SP', 'São Paulo', 'Localização aproximada aplicada: São Paulo, SP');
           },
           { timeout: 3500, enableHighAccuracy: false }
         );
